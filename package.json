@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Blboun3/ALPHA-Admin/issues"
   },
-  "homepage": "https://github.com/Blboun3/ALPHA-Admin#readme"
+  "homepage": "https://github.com/Blboun3/ALPHA-Admin#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
 }
