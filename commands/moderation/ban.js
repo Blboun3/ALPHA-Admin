@@ -10,8 +10,8 @@ module.exports = {
 			return message.reply('Musíš označit nějakého uživatele');
 		}
 
-		const taggedUser = message.mentions.users.first();
-		//taggedUser.();
-		message.channel.send(`Dal jsi ban: ${taggedUser.username} ` + args );
+		const taggedUser = message.mentions.members.first();
+		taggedUser.ban(args[1]);
+		message.channel.send(`Dal jsi ban: ${taggedUser.username}`);
 	},
 };
