@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'kick',
-	description: 'Kickne označeného membera',
+	description: 'Kickne označeného uživatele',
 	usage: "<user> [reason]",
 	args: "true",
 	guildOnly: true,

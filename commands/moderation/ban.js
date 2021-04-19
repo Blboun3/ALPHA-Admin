@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'ban',
-	description: 'Dá ban označenému memberu',
+	description: 'Dá ban označenému členovi',
 	usage: "<user> [reason]",
 	args: "true",
 	guildOnly: true,
