@@ -111,3 +111,5 @@ client.on('message', (message) => {
 		message.reply('Někde došlo k chybě a váš příkaz se nepodařilo zpracovat, omlouváme se za problém.'); // Napsání chyby
 	}
 });
+
+//client.on();

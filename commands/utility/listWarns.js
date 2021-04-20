@@ -22,11 +22,13 @@ module.exports = {
 
 			DB.query(`SELECT * FROM warns WHERE userID="${taggedUser.id}"`, (err, result) => {
 				if(err) throw err;
-				var out;
+				var out = "ID | Autor | Důvod | Datum a čas \n"+
+					  "-------------------------------- \n"
 				for(const element of result){
 					let output = `**${element.warnID}** | <@!${element.warnAuthor}> | ${element.reason} | ${element.warnDate} \n`;
 					out = out + output;
 				}
+				console.log(out);
 				return message.channel.send(out);
 			});
 		}
