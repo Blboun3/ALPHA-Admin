@@ -17,7 +17,7 @@ module.exports = {
 				message.channel.messages.fetch({around: msgID, limit: 1}).then(msg => {
 					const fetchedMessage = msg.first();
 					fetchedMessage.react('✅');
-					DB.query(`INSERT INTO configs(configName, configValue) VALUES ("monitored_msg", "${msgID}")`,(err) =>{
+					DB.query(`INSERT INTO configs(configName, configValue) VALUES ("verify_msg", "${msgID}")`,(err) =>{
 						if(err) throw err;
 					});
 				});

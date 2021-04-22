@@ -2,22 +2,24 @@ const mysql = require("mysql"); // Knihovna na pracování s DB
 const fs = require('fs'); // FileSync 
 const Discord = require('discord.js'); // Knihovna na Discord js
 
-const client = new Discord.Client(); // Discord klient
+const client = new Discord.Client({
+	partial:['MESSAGE', 'CHANNEL', 'REACTION'] // Discord bot konfigurace
+}); // Discord klient
 client.commands = new Discord.Collection(); // příkazy
 client.cooldowns = new Discord.Collection(); // a jejich cooldowny
 
-const prefix = "!";
+const prefix = "!"; // Prefix
 
-global.__basedir = __dirname;
+global.__basedir = __dirname; // Globální proměnná uchovávajíci cestu k základní složce ze které program běží
 
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js')); // Složka s event handlery
 
-for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args, client, DB));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args, client, DB));
+for (const file of eventFiles) { // Projití všech eventů
+	const event = require(`./events/${file}`); // Requirnutí eventu
+	if (event.once) { // Jestli je to event, který má být zavolaný pouze jednou
+		client.once(event.name, (...args) => event.execute(...args, client, DB)); // Nastavení eventu na client.once();
+	} else { // Event který se spustí vícekrát (message, reasction, memberADD, memberREMOVE atd.)
+		client.on(event.name, (...args) => event.execute(...args, client, DB)); // Nastavení eventu
 	}
 }
 
