@@ -12,7 +12,7 @@ module.exports = {
 		}
 		console.log(".");
 		const member = reaction.message.guild.member(user); // Získání membera
-		DB.query(`SELECT * FROM configs WHERE configName LIKE "%Role%" OR configName LIKE "%msg%" ORDER BY configID;`, (err, results) =>{
+		DB.query(`SELECT * FROM configs WHERE configName LIKE "%Role%" OR configName LIKE "%msg%" ORDER BY configID;`, (err, results) => {
 			if(err) throw err;
 			switch(reaction.message.id){
 				case results[3].configValue:
