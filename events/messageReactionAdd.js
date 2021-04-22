@@ -1,6 +1,6 @@
 module.exports = {
     name: 'messageReactionAdd',
-    execute: async(reaction, user, client, DB) => {
+    async execute(reaction, user, client, DB) {
         if (reaction.partial) { // Pokud je partial
             console.log(".");
             try {
