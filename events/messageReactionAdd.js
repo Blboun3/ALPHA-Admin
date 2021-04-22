@@ -1,8 +1,8 @@
 module.exports = {
     name: 'messageReactionAdd',
     async execute(reaction, user, client, DB) {
+    	console.log("tu");
         if (reaction.partial) { // Pokud je partial
-            console.log(".");
             try {
                 await reaction.fetch(); // fetchnout celou reaction
             } catch (error) { // error
@@ -10,7 +10,6 @@ module.exports = {
                 return;
             }
         }
-        console.log(".");
         const member = reaction.message.guild.member(user); // Získání membera
         DB.query(`SELECT * FROM configs WHERE configName LIKE "%Role%" OR configName LIKE "%msg%" ORDER BY configID;`, (err, results) => {
             if (err) throw err;
@@ -75,7 +74,7 @@ module.exports = {
                             break;
                         case "🖕":
                             reaction.users.remove(user.id);
-                            user.send('Čím to jako reaguješ na zprávy našeho velkého vládce ?');
+                            user.send('Čím to jako reaguješ na zprávy ? Co si to jako dovoluješ ?');
                             break;
                     }
             }

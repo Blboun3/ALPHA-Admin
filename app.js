@@ -1,6 +1,8 @@
-const mysql = require("mysql"); // Knihovna na pracování s DB
+const mysql = require("mysql2"); // Knihovna na pracování s DB
 const fs = require('fs'); // FileSync 
 const Discord = require('discord.js'); // Knihovna na Discord js
+require('dotenv').config() // Dotenv
+
 
 const client = new Discord.Client({
     partial: ['MESSAGE', 'CHANNEL', 'REACTION'] // Discord bot konfigurace
@@ -8,9 +10,8 @@ const client = new Discord.Client({
 client.commands = new Discord.Collection(); // příkazy
 client.cooldowns = new Discord.Collection(); // a jejich cooldowny
 
-const prefix = "!"; // Prefix
-
 global.__basedir = __dirname; // Globální proměnná uchovávajíci cestu k základní složce ze které program běží
+global.prefix = process.env.BOT_PREFIX; // Globální proměnná pro prefix
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js')); // Složka s event handlery
 
@@ -25,10 +26,10 @@ for (const file of eventFiles) { // Projití všech eventů
 
 // Vytvoření objektu k připojení k databázi
 var DB = mysql.createConnection({
-    host: "localhost", // Kam ?
-    user: "root", // Kdo ?
-    password: "ALPHA_is_best_123", // Heslo
-    database: "ALPHA" // DB
+    host: process.env.DB_IP, // Kam ?
+    user: process.env.DB_USER, // Kdo ?
+    password: process.env.DB_PASSWORD, // Heslo
+    database: process.env.DB_NAME, // DB
 });
 
 // Připojení k databázi
@@ -37,8 +38,5 @@ DB.connect((err) => {
     console.log("Connected!"); // Napsání úspěšného připojení
 });
 
-// Vytáhnutí 'tokenu' a přihlášení se k discordu
-DB.query(`SELECT configValue FROM configs WHERE (configName='token');`, (err, result) => {
-    if (err) throw err; // Vyhození erroru
-    client.login(result[0].configValue); // Přihlášení se k discordu, získaným tokenem
-});
+
+client.login(process.env.BOT_TOKEN); // Přihlášení se k discordu, získaným tokenem

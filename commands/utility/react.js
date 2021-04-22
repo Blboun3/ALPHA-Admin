@@ -4,7 +4,7 @@ module.exports = {
     usage: '<reactionID>',
     permissions: 'ADMINISTRATOR',
     timeout: 0,
-    execute: async(message, args, DB) => {
+    execute (message, args, DB) {
         if (args[0] == 1) {
             var embed = {
                 color: 0x15fc00,

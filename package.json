@@ -24,7 +24,8 @@
     "homepage": "https://github.com/Blboun3/ALPHA-Admin#readme",
     "dependencies": {
         "discord.js": "^12.5.3",
-        "mysql": "^2.18.1",
+        "dotenv": "^8.2.0",
+        "mysql2": "^2.2.5",
         "nodemon": "^2.0.7"
     }
 }
