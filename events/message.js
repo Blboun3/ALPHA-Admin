@@ -1,9 +1,11 @@
-const fs = require('fs'); // FileSync
-const Discord = require('discord.js');
+const fs = require('fs'); // FileSystem
+const Discord = require('discord.js'); // DiscordJS
 module.exports = {
-    name: 'message',
-    execute(message, client, DB) {
-        const prefix = "!";
+    name: 'message', // Proběhne, když někdo napíše zprávu
+    execute(message, client, DB) { // parametry: zpráva, client (bot) a DB (databáze)
+    	/*
+    	Tento kód je upravenou verzí kódu z oficiální dokumentace pro discord bota 
+    	*/
         const commandFolders = fs.readdirSync(__basedir + '/commands'); // složka s příkazy
 
         // Načtení všech příkazů do client.commands
@@ -14,10 +16,10 @@ module.exports = {
                 client.commands.set(command.name, command); // Přípsání příkazu do colekce pro bota
             }
         }
-        if (!message.content.startsWith(prefix) || message.author.bot) return; // DoaČasné, pokud zpráva nezačíná prefixem nebo jí napsal bot
+        if (!message.content.startsWith(__prefix) || message.author.bot) return; // DoaČasné, pokud zpráva nezačíná __prefixem nebo jí napsal bot
 
         // Zpracování vstupu, vytáhnutí argumentů a příkazu
-        const args = message.content.slice(prefix.length).trim().split(/ +/);
+        const args = message.content.slice(__prefix.length).trim().split(/ +/);
         const commandName = args.shift().toLowerCase();
 
         // najití příkazu nebo najití příkazu pomocí jeho aliasů
@@ -45,7 +47,7 @@ module.exports = {
             let reply = `Vypadá to, že takto se tento příkaz nepoužívá, zadal jsi málo argumentu, ${message.author}!`; // Nedostatek argumentů
 
             if (command.usage) {
-                reply += `\nSprávné použití je: \`${prefix}${command.name} ${command.usage}\``;
+                reply += `\nSprávné použití je: \`${__prefix}${command.name} ${command.usage}\``;
             }
 
             return message.channel.send(reply); // Odeslání odpovědí a vyskočení z funkce

@@ -1,6 +1,6 @@
 module.exports = {
-    name: 'react',
-    description: 'Udělá reakční zprávu, jako je verifikace',
+    name: 'react', // Jméno
+    description: 'Udělá reakční zprávu, jako je verifikace', // 
     usage: '<reactionID>',
     permissions: 'ADMINISTRATOR',
     timeout: 0,

@@ -1,7 +1,6 @@
 module.exports = {
     name: 'messageReactionAdd',
     async execute(reaction, user, client, DB) {
-    	console.log("tu");
         if (reaction.partial) { // Pokud je partial
             try {
                 await reaction.fetch(); // fetchnout celou reaction
@@ -15,12 +14,6 @@ module.exports = {
             if (err) throw err;
             switch (reaction.message.id) {
                 case results[3].configValue:
-                    reaction.users.remove(user.id);
-                    if (reaction.emoji.name == "✅") {
-                        newMember(member);
-                    }
-                    break;
-                case results[4].configValue:
                     reaction.users.remove(user.id);
                     switch (reaction.emoji.name) {
                         case "🧮":
@@ -42,6 +35,13 @@ module.exports = {
                                 member.roles.remove(reasults[1].configValue);
                             } else {
                                 member.roles.add(reasults[1].configValue);
+                            }
+                            break;
+                        case "🧲":
+                            if (member.roles.cache.has(reasults[4].configValue)) {
+                                member.roles.remove(reasults[4].configValue);
+                            } else {
+                                member.roles.add(reasults[4].configValue);
                             }
                             break;
                     }
