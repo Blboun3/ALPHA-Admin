@@ -10,15 +10,19 @@ module.exports = {
             }
         }
         const member = reaction.message.guild.member(user); // Získání membera
-        DB.query(`SELECT * FROM configs WHERE configName LIKE "%Role%" OR configName LIKE "%msg%" ORDER BY configID;`, (err, results) => {
+        if(member.id == "797862942036721664"){ // Pokud reakce přidal robot
+            return undefined
+        }
+
+        DB.query(`SELECT * FROM configs WHERE configName LIKE "%Role%" OR configName LIKE "%msg%" ORDER BY configID;`, (err, results) => { // Vytáhnutí rolí, zpráv a channelů z DB
             if (err) throw err;
             switch (reaction.message.id) {
-                case results[3].configValue:
+                case results[6].configValue:
                     reaction.users.remove(user.id);
                     switch (reaction.emoji.name) {
                         case "🧮":
                             if (member.roles.cache.has(results[2].configValue)) {
-                                member.roles.remove(results[2].confiValue);
+                                member.roles.remove(results[2].configValue);
                             } else {
                                 member.roles.add(results[2].configValue);
                             }
@@ -31,17 +35,17 @@ module.exports = {
                             }
                             break;
                         case "🔋":
-                            if (member.roles.cache.has(reasults[1].configValue)) {
-                                member.roles.remove(reasults[1].configValue);
+                            if (member.roles.cache.has(results[1].configValue)) {
+                                member.roles.remove(results[1].configValue);
                             } else {
-                                member.roles.add(reasults[1].configValue);
+                                member.roles.add(results[1].configValue);
                             }
                             break;
-                        case "🧲":
-                            if (member.roles.cache.has(reasults[4].configValue)) {
-                                member.roles.remove(reasults[4].configValue);
+                        case "⚛️":
+                            if (member.roles.cache.has(results[3].configValue)) {
+                                member.roles.remove(results[3].configValue);
                             } else {
-                                member.roles.add(reasults[4].configValue);
+                                member.roles.add(results[3].configValue);
                             }
                             break;
                     }

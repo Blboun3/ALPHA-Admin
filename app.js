@@ -37,8 +37,6 @@ var DB = mysql.createConnection({
     database: process.env.DB_NAME, // DB
 });
 
-//var guild = client.guilds.get("797860030065147955");
-
 DB.connect((err) => {
     if (err) throw err; // Vyhození erroru
     console.log("Connected!"); // Napsání úspěšného připojení
