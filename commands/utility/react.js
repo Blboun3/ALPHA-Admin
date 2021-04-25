@@ -9,24 +9,9 @@ module.exports = {
             var embed = {
                 color: 0x15fc00,
                 title: "Ověření",
-                description: "Kliknutí na ✅ souhlasíte s pravidly a zavazujete se k jejich dodržování."
+                description: "Pro ověření, že jste člověk, prosím napište svoje uživatelské jméno a svůj unikátní identifikátor ve formátu `ALPHA#5676` \nV případě jakýchkoliv problémů prosím kontaktujte <@!573080354567487499>"
             };
-            message.channel.send({
-                embed: embed
-            }).then(sent => {
-                message.delete();
-                let msgID = sent.id;
-                message.channel.messages.fetch({
-                    around: msgID,
-                    limit: 1
-                }).then(msg => {
-                    const fetchedMessage = msg.first();
-                    fetchedMessage.react('✅');
-                    DB.query(`INSERT INTO configs(configName, configValue) VALUES ("verify_msg", "${msgID}")`, (err) => {
-                        if (err) throw err;
-                    });
-                });
-            });
+            message.channel.send({embed: embed});
         }
     }
 };

@@ -3,6 +3,19 @@ const Discord = require('discord.js'); // DiscordJS
 module.exports = {
     name: 'message', // Proběhne, když někdo napíše zprávu
     execute(message, client, DB) { // parametry: zpráva, client (bot) a DB (databáze)
+        // Zjištění, jestli je zpráva ve verify channelu
+        DB.query(`SELECT configValue FROM configs WHERE configName="verify_channel"`, (err, result) => { // Vytažení channelu z DB
+            if(err) throw err; // Vyhození erroru
+            if(message.channel.id == result[0].configValue){ // Pokud je zpráva ve verifikačním channelu
+               if(message.content.toLowerCase() == message.author.tag.toLowerCase()){ // Pokud verifikace projde
+                DB.query(`SELECT configValue FROM configs WHERE configName="verifiedRole"`, (errA, resultA) => { // Vytažení verified role ID z DB
+                    if(errA) throw errA; // Vyhození erroru
+                    message.member.roles.add(resultA[0].configValue);
+                    message.delete();
+                });
+               }
+            }
+        });
     	/*
     	Tento kód je upravenou verzí kódu z oficiální dokumentace pro discord bota 
     	*/

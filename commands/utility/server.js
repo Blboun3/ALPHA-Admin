@@ -3,6 +3,7 @@ module.exports = {
     aliases: ["info", "srv"], // Aliasy
     cooldown: 10, // Cooldown
     description: 'Vypíše informace o aktuálním serveru', // Popis
+    guildOnly: true,
     execute(message) { // Execution
         message.channel.send(`**Jméno:** ${message.guild.name}\n**Celkem členů:** ${message.guild.memberCount}`); // Vypsání informací
     },

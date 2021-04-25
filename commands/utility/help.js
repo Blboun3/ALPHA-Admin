@@ -20,7 +20,7 @@ module.exports = {
                 let tmp = [];
                 commands.forEach(command => {
                     if(authorPerms.has(command.permissions)){
-                        tmp.push(command.name);
+                        tmp.push(" " + command.name);
                     }
                 });
                 data.push(tmp);
