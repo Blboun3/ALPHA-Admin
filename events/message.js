@@ -13,7 +13,14 @@ module.exports = {
                     message.member.roles.add(resultA[0].configValue);
                     message.delete();
                 });
-               }
+               }else{
+                if(!message.author.bot){
+                    message.channel.send("Vypadá to, že toto není správně, zkus to prosím znovu").then(msg => {
+                        msg.delete({timeout: 10000});
+                    });
+                    message.delete();
+                   }
+                }    
             }
         });
     	/*

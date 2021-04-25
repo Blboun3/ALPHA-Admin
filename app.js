@@ -11,7 +11,7 @@ require('dotenv').config() // Dotenv
 
 
 const client = new Discord.Client({
-    partial: ['MESSAGE', 'CHANNEL', 'REACTION'] // Discord bot konfigurace
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'] // Discord bot konfigurace
 }); // Discord klient
 client.commands = new Discord.Collection(); // příkazy
 client.cooldowns = new Discord.Collection(); // a jejich cooldowny
