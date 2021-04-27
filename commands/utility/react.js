@@ -12,6 +12,22 @@ module.exports = {
                 description: "Pro ověření, že jste člověk, prosím napište svoje uživatelské jméno a svůj unikátní identifikátor ve formátu `ALPHA#5676` \nV případě jakýchkoliv problémů prosím kontaktujte <@!573080354567487499>"
             };
             message.channel.send({embed: embed});
+            msessage.delete();
+        }
+        if(args[0] == 2){
+            var embed = {
+                color: 0x15dc00,
+                title: "Role",
+                description:"**🧮: Matematika** \nPro ty, které zajímá matematika \n**💻: Programování** \nPro ty, které zajímá programování a počítače \n**🔋: Elektronika** \nPro ty, které zajímá elektronika a elektro bastlení \n**⚛️: Fyzika** \nPro ty, které zajímá fyzika"
+            }
+            message.channel.send({embed: embed}).then(sent => {
+                sent.react("🧮")
+                    .then(() => sent.react("💻"))
+                    .then(() => sent.react("🔋"))
+                    .then(() => sent.react("⚛️"))
+                    .catch(() => console.error("One or more emojis failed to react"));
+            });
+            message.delete();
         }
     }
 };

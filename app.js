@@ -11,7 +11,7 @@ require('dotenv').config() // Dotenv
 
 
 const client = new Discord.Client({
-    partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'] // Discord bot konfigurace
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER', 'MEMBERS'] // Discord bot konfigurace
 }); // Discord klient
 client.commands = new Discord.Collection(); // příkazy
 client.cooldowns = new Discord.Collection(); // a jejich cooldowny
@@ -42,4 +42,5 @@ DB.connect((err) => {
     console.log("Connected!"); // Napsání úspěšného připojení
 });
 
+//guild.members.filter(member => !member.user.bot).size
 client.login(process.env.BOT_TOKEN); // Přihlášení se k discordu, získaným tokenem
