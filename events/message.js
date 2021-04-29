@@ -12,9 +12,10 @@ module.exports = {
                     if(errA) throw errA; // Vyhození erroru
                     message.member.roles.add(resultA[0].configValue);
                     message.delete();
+                    welcome(message.author.id, client);
                 });
                }else{
-                if(!message.author.bot){
+                if(!message.author.bot){ // Pokud zprávu nenapsal bot, aby se "nezlobil" sám na sebe
                     message.channel.send("Vypadá to, že toto není správně, zkus to prosím znovu").then(msg => {
                         msg.delete({timeout: 10000});
                     });
@@ -106,3 +107,12 @@ module.exports = {
 
     },
 };
+
+function welcome(member, client){
+    DB.query(`SELECT * FROM configs WHERE configName="welcomeChannel"`, (err, res) => {
+        if (err) throw err;
+        var channel = client.channels.get(ress[0].configValue);
+        channel.send(`Ahoj <@!${member}>,  vítej na ALPHĚ, doufáme, že se ti tu bude líbit!`);
+
+    });
+}
