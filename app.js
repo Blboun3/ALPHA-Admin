@@ -18,6 +18,7 @@ client.cooldowns = new Discord.Collection(); // a jejich cooldowny
 
 global.__basedir = __dirname; // Globální proměnná uchovávajíci cestu k základní složce ze které program běží
 global.__prefix = process.env.BOT_PREFIX; // Globální proměnná pro ____prefix
+global.__badWords = "";
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js')); // Složka s event handlery
 

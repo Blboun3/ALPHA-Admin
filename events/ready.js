@@ -29,3 +29,7 @@ function timedUpdate(client, DB){ // Funkce která proběhne každých 60 minut
         });  
     }); 
 }
+
+function getBadwords(DB){
+    
+}

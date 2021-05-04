@@ -12,7 +12,7 @@ module.exports = {
                     if(errA) throw errA; // Vyhození erroru
                     message.member.roles.add(resultA[0].configValue);
                     message.delete();
-                    welcome(message.author.id, client);
+                    welcome(message.author.id, client, DB);
                 });
                }else{
                 if(!message.author.bot){ // Pokud zprávu nenapsal bot, aby se "nezlobil" sám na sebe
@@ -24,6 +24,51 @@ module.exports = {
                 }    
             }
         });
+
+        // Counting
+        DB.query(`SELECT configValue FROM configs WHERE configName="counting"`, (err, result) => {
+            if (err) throw err; // Vyhození erroru
+            if(message.channel.id = result[0].configValue){ // Pokud je správný channel
+                // Získání posledního čísla
+                DB.query(`SELECT * FROM counting WHERE variable="thisNumber"`, (errI, resultI) => {
+                    if(errI) throw errI;
+                    if(!message.content.match("\\D")){ // Jestli zpráva obsahuje číslici (neobsahuje cokoliv jinýho)
+                        DB.query(`SELECT * FROM counting WHERE variable="lastAuthor"`, (errA, resultA) => { // Získání posledního autora
+                            if(errA) throw errA;
+                            if(message.author.id == resultA[0].value){ // Checknutí autora, jeslti nepsal číslo předtím
+                                message.channel.send(`<@!${message.author.id}>, ty jsi psal číslo před tím, brzdi trochu`);
+                            } else { // Jestli nenapal
+                                if(message.content == fib(parseInt(resultI[0].value) + 1)){ // Jestliže číslo sedí na další číslo řady
+                                    DB.query(`SELECT * FROM counting WHERE variable="greatestNumber"`, (errII, resultII) => { // Jestli je nejvyšší číslo dosažené
+                                        if((resultI[0].value + 1) >= resultII[0].value){ // Největší dosažené číslo
+                                            DB.query(`UPDATE counting SET value="${parseInt(resultI[0].value) + 1}" WHERE variable="thisNumber"`); // aktualizování aktuálního čísĺa
+                                            DB.query(`UPDATE counting SET value="${parseInt(resultI[0].value) + 1}" WHERE variable="greatestNumber"`); // aktualizování nejvyššího čísĺa
+                                            DB.query(`UPDATE counting SET value="${message.author.id}" WHERE variable="bestCounter"`); // aktualizování nejlepšího počátře
+                                            DB.query(`UPDATE counting SET value="${message.author.id}" WHERE variable="lastAuthor"`); // aktualizování posledního počtáře
+                                            message.react("☑️");
+                                        }else{ // Není new best
+                                            DB.query(`UPDATE counting SET value="${message.author.id}" WHERE variable="lastAuthor"`); // aktualizování posledního počtáře
+                                            DB.query(`UPDATE counting SET value="${resultI[0].value + 1}" WHERE variable="thisNumber"`); // aktualizování aktuálního čísĺa
+                                            message.react("✅");
+                                        }
+                                    });
+                                } else { // Číslo je špatně
+                                    message.channel.send(`<@!${message.author.id}>, Vypadá to, že jsi to pokazil, jedeme znovu!`);
+                                    DB.query(`UPDATE counting SET value="${message.author.id}" WHERE variable="lastAuthor"`); // aktualizování posledního počtáře (aka posledního co napsal zprávu)
+                                    DB.query(`UPDATE counting SET value="0" WHERE variable="thisNumber"`); // aktualizování aktuálního čísĺa na nulu (aka reset)
+                                }
+                            }
+                        });
+                    } else { // Neobsahuje číslo
+                        if(!message.author.bot){
+                            message.delete(); // Smaž zprávu
+                        }
+                    }
+                });
+            }
+        });
+
+
     	/*
     	Tento kód je upravenou verzí kódu z oficiální dokumentace pro discord bota 
     	*/
@@ -108,11 +153,18 @@ module.exports = {
     },
 };
 
-function welcome(member, client){
+function welcome(member, client, DB){
     DB.query(`SELECT * FROM configs WHERE configName="welcomeChannel"`, (err, res) => {
         if (err) throw err;
         var channel = client.channels.get(ress[0].configValue);
         channel.send(`Ahoj <@!${member}>,  vítej na ALPHĚ, doufáme, že se ti tu bude líbit!`);
 
     });
+}
+
+function fib(number){
+    var top1 = Math.pow(((1+Math.sqrt(5))/2), number);
+    var top2 = Math.pow(((1-Math.sqrt(5))/2), number);
+    var fibNr = (top1 - top2)/Math.sqrt(5);
+    return fibNr;
 }

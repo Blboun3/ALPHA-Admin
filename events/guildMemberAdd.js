@@ -9,8 +9,10 @@ module.exports = {
             var rls = result[0].roles.split(","); // pokud našel role, tak je rozdělí po ","
             if (rls != undefined) { // Pokud role jsou undefined (člen leavnul, ale neměl žádný role, ani verify)
                 rls.forEach(function(rl) { // pro každý item v poli
-                    let role = member.guild.roles.cache.find(role => role.id == rl); // Najití role
-                    member.roles.add(role); // Přidání rolí uživateli
+                    try{
+                        let role = member.guild.roles.cache.find(role => role.id == rl); // Najití role
+                        member.roles.add(role); // Přidání rolí uživateli
+                    } catch(e){}
                 });
                 DB.query(`DELETE FROM users WHERE userID="${member.id}"`, (err) => { // Smazání užicatele z databáze uživatelů, kteří leavly, důvod je, aby se případně nějak nekombinovali role
                     if (err) throw err; // Pokud error, hoď error
