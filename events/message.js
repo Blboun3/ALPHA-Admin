@@ -28,7 +28,7 @@ module.exports = {
         // Counting
         DB.query(`SELECT configValue FROM configs WHERE configName="counting"`, (err, result) => {
             if (err) throw err; // Vyhození erroru
-            if(message.channel.id = result[0].configValue){ // Pokud je správný channel
+            if(message.channel.id == result[0].configValue){ // Pokud je správný channel
                 // Získání posledního čísla
                 DB.query(`SELECT * FROM counting WHERE variable="thisNumber"`, (errI, resultI) => {
                     if(errI) throw errI;
