@@ -3,7 +3,7 @@ const Discord = require('discord.js'); // DiscordJS
 
 module.exports = execute;
 
-async function execute(ProfileImg, ProfileTag, channel, client){
+async function execute(ProfileImg, ProfileTag, channel, client, ProfileId){
 	/*
 	Vytvoření canvasu
 	*/
@@ -34,5 +34,5 @@ async function execute(ProfileImg, ProfileTag, channel, client){
 	ctx.fillText(text, x, 100 + pfp.height); // Vypsání textu
 
     const attachment = new Discord.MessageAttachment(canvas.toBuffer());
-	await channel.send("", attachment); // Odeslání
+	await channel.send(`Vítej <@!${ProfileId}>, na ALPHě - největším českém matematicko-programátorském serveru!`, attachment); // Odeslání
 }

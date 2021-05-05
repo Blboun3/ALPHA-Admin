@@ -13,7 +13,7 @@ module.exports = {
                     if(errA) throw errA; // Vyhození erroru
                     message.member.roles.add(resultA[0].configValue);
                     message.delete();
-                    imgGen(message.author.displayAvatarURL({format: 'png'}), message.author.tag, message.channel, client);
+                    imgGen(message.author.displayAvatarURL({format: 'png'}), message.author.tag, message.channel, client, message.author.id);
                 });
                }else{
                 if(!message.author.bot){ // Pokud zprávu nenapsal bot, aby se "nezlobil" sám na sebe
