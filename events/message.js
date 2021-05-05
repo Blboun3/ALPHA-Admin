@@ -156,7 +156,7 @@ module.exports = {
 function welcome(member, client, DB){
     DB.query(`SELECT * FROM configs WHERE configName="welcomeChannel"`, (err, res) => {
         if (err) throw err;
-        var channel = client.channels.get(ress[0].configValue);
+        var channel = client.channels.get(res[0].configValue);
         channel.send(`Ahoj <@!${member}>,  vítej na ALPHĚ, doufáme, že se ti tu bude líbit!`);
 
     });
