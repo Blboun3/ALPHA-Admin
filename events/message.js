@@ -1,5 +1,6 @@
 const fs = require('fs'); // FileSystem
 const Discord = require('discord.js'); // DiscordJS
+const imgGen = require('../ImageGeneration/Functions/welcome.js');
 module.exports = {
     name: 'message', // Proběhne, když někdo napíše zprávu
     execute(message, client, DB) { // parametry: zpráva, client (bot) a DB (databáze)
@@ -12,7 +13,7 @@ module.exports = {
                     if(errA) throw errA; // Vyhození erroru
                     message.member.roles.add(resultA[0].configValue);
                     message.delete();
-                    welcome(message.author.id, client, DB);
+                    imgGen(message.author.displayAvatarURL({format: 'png'}), message.author.tag, message.channel, client);
                 });
                }else{
                 if(!message.author.bot){ // Pokud zprávu nenapsal bot, aby se "nezlobil" sám na sebe
@@ -152,15 +153,6 @@ module.exports = {
 
     },
 };
-
-function welcome(member, client, DB){
-    DB.query(`SELECT * FROM configs WHERE configName="welcomeChannel"`, (err, res) => {
-        if (err) throw err;
-        var channel = client.channels.get(res[0].configValue);
-        channel.send(`Ahoj <@!${member}>,  vítej na ALPHĚ, doufáme, že se ti tu bude líbit!`);
-
-    });
-}
 
 function fib(number){
     var top1 = Math.pow(((1+Math.sqrt(5))/2), number);

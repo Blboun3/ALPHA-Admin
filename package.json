@@ -23,6 +23,7 @@
     },
     "homepage": "https://github.com/Blboun3/ALPHA-Admin#readme",
     "dependencies": {
+        "canvas": "^2.7.0",
         "discord.js": "^12.5.3",
         "dotenv": "^8.2.0",
         "mysql2": "^2.2.5"

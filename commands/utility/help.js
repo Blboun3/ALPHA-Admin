@@ -27,9 +27,12 @@ module.exports = {
             }
             data.push(`\nMůžeš napsat \`${__prefix}help [command name]\` aby jsi zjistil podrobnější informace k specifickému příkazu!`);
 
-            return message.author.send(data, { // IDK
-                    split: true
-                })
+            var embed = {
+                color: 0x15fc00,
+                title: "Příkazy",
+                description: `${data.toString().trim()}`
+            };
+            return message.author.send(data)
                 .then(() => {
                     if (message.channel.type === 'dm') return; // Napsání do DM
                     message.reply('Poslal jsem ti DM se seznamem všech příkazů!');

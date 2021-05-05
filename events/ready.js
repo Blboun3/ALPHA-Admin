@@ -4,6 +4,7 @@ module.exports = {
     execute(client, DB) {
         console.log(`Ready! Logged in as ${client.user.tag}`); // Napíše do console že je online a svůj user.
         setInterval(function(){timedUpdate(client, DB);}, 1000 * 3600); // Každou hodinu
+        // 797859272473182208
     },
 };
 
