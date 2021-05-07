@@ -4,35 +4,48 @@ const Discord = require('discord.js'); // DiscordJS
 module.exports = execute;
 
 async function execute(ProfileImg, ProfileTag, channel, client, ProfileId){
-	/*
-	Vytvoření canvasu
-	*/
-	const canvas = Canvas.createCanvas(700,250); // 2D canvas
-	const ctx = canvas.getContext('2d');
-	/*
-	Načtení obrázků
-	*/
-	const background = await Canvas.loadImage("/home/cyril/Documents/ALPHA-Admin/ALPHA-Admin/ImageGeneration/Images/backgroundImage.png"); // Načtení pozadí
-	let x, y = 0; // pozice [0,0]
-	ctx.drawImage(background, 0, 0); // Nakreslení obrázku
-	const pfp = await Canvas.loadImage(ProfileImg); // member.user.displayAvatarURL({format: 'png'});
-	x = canvas.width / 2 - pfp.width / 2; // Nastavení pozice X
-	y = 25;//canvas.height / 2 - pfp.height / 2; // Nastavení pozice Y
-	ctx.drawImage(pfp, x, y); // Nakreslení profilovky
-	/*
-	Napsání textu
-	*/
-	ctx.fillStyle = "#ffffff"; // White text
-	ctx.font = '35px sans-serif'; // Nastavení fontu
-	let text = `Vítej ${ProfileTag}` // member.user.tag
-	x = canvas.width / 2 - ctx.measureText(text).width / 2; // X pozice
-	ctx.fillText(text, x, 60 + pfp.height); // Napsání textu
+	const canvas = Canvas.createCanvas(700, 250); // Vytovření canvasu
+	const context = canvas.getContext('2d'); // 2D canvas
 
-	ctx.font = '30px sans-serif'; // Nastavení fontu
-	text = "na ALPHě!"; // Text
-	x = canvas.width / 2 - ctx.measureText(text).width / 2;// X pozice
-	ctx.fillText(text, x, 100 + pfp.height); // Vypsání textu
+	const background = await Canvas.loadImage(`${__basedir}/ImageGeneration/Images/wallpaper.png`); // Obrázek
+	context.drawImage(background, 0, 0, canvas.width, canvas.height); // Nakreslní obrázku
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer());
-	await channel.send(`Vítej <@!${ProfileId}>, na ALPHě - největším českém matematicko-programátorském serveru!`, attachment); // Odeslání
+	context.strokeStyle = '#74037b'; // Barva
+	context.strokeRect(0, 0, canvas.width, canvas.height); // Čtverec 1
+
+	context.font = '28px sans-serif';
+	context.fillStyle = '#ffffff';
+	context.fillText(`Vítej na ALPHĚ,`, canvas.width / 2.5, canvas.height / 3.5);
+
+	context.font = applyText(canvas, `${ProfileTag}!`);
+	context.fillStyle = '#ffffff';
+	context.fillText(`${ProfileTag}!`, canvas.width / 2.5, canvas.height / 1.8);
+
+	context.beginPath();
+	context.arc(125, 125, 100, 0, Math.PI * 2, true);
+	context.closePath();
+	context.clip();
+
+	const avatar = await Canvas.loadImage(ProfileImg);
+	context.drawImage(avatar, 25, 25, 200, 200);
+
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+
+	channel.send(`Vítej na ALPHĚ <@!${ProfileId}> - největším českém matematicko-programátorském serveru!`, attachment);
 }
+
+const applyText = (canvas, text) => {
+	const ctx = canvas.getContext('2d');
+
+	// Declare a base size of the font
+	let fontSize = 70;
+
+	do {
+		// Assign the font to the context and decrement it so it can be measured again
+		ctx.font = `${fontSize -= 10}px sans-serif`;
+		// Compare pixel width of the text to the canvas minus the approximate avatar size
+	} while (ctx.measureText(text).width > canvas.width - 300);
+
+	// Return the result to use in the actual canvas
+	return ctx.font;
+};

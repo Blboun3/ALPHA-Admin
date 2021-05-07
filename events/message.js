@@ -13,7 +13,11 @@ module.exports = {
                     if(errA) throw errA; // Vyhození erroru
                     message.member.roles.add(resultA[0].configValue);
                     message.delete();
-                    imgGen(message.author.displayAvatarURL({format: 'png'}), message.author.tag, message.channel, client, message.author.id);
+                    DB.query(`SELECT configValue FROM configs WHERE configName="welcomeChannel"`,(errE, resultE) => {
+                        if(errE) throw errE;
+                        var channel = client.channels.cache.get(resultE[0].configValue);
+                        imgGen(message.author.displayAvatarURL({format: 'png'}), message.author.tag, channel, client, message.author.id,  message.guild.memberCount);
+                    });
                 });
                }else{
                 if(!message.author.bot){ // Pokud zprávu nenapsal bot, aby se "nezlobil" sám na sebe
