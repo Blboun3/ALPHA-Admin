@@ -13,7 +13,6 @@ module.exports = {
         if(member.id == "797862942036721664"){ // Pokud reakce přidal robot
             return undefined
         }
-        console.log(reaction);
         DB.query(`SELECT * FROM configs WHERE configName LIKE "%Role%" OR configName LIKE "%msg%" ORDER BY configID;`, (err, results) => { // Vytáhnutí rolí, zpráv a channelů z DB
             if (err) throw err;
             switch (reaction.message.id) {

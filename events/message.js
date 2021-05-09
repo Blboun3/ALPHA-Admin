@@ -73,26 +73,11 @@ module.exports = {
             }
         });
 
-
-    	/*
-    	Tento kód je upravenou verzí kódu z oficiální dokumentace pro discord bota 
-    	*/
-        const commandFolders = fs.readdirSync(__basedir + '/commands'); // složka s příkazy
-
-        // Načtení všech příkazů do client.commands
-        for (const folder of commandFolders) { // Pro každou podsložku (a.k.a kategorii příkazů) 
-            const commandFiles = fs.readdirSync(__basedir + `/commands/${folder}`).filter(file => file.endsWith('.js')); // Všechny soubory končící na *.js
-            for (const file of commandFiles) { // Pro každý takový soubor
-                const command = require(__basedir + `/commands/${folder}/${file}`); // Příkaz
-                client.commands.set(command.name, command); // Přípsání příkazu do colekce pro bota
-            }
-        }
         if (!message.content.startsWith(__prefix) || message.author.bot) return; // DoaČasné, pokud zpráva nezačíná __prefixem nebo jí napsal bot
 
         // Zpracování vstupu, vytáhnutí argumentů a příkazu
         const args = message.content.slice(__prefix.length).trim().split(/ +/);
         const commandName = args.shift().toLowerCase();
-
         // najití příkazu nebo najití příkazu pomocí jeho aliasů
         const command = client.commands.get(commandName) ||
             client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));

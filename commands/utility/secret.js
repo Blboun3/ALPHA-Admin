@@ -12,7 +12,12 @@ module.exports = {
 	        	message.member.roles.add(role);
 	        });
 	        message.delete();
-    	}
-    	message.delete();
+    	} else if (args[0] == "GJB") {
+            DB.query(`SELECT configValue FROM configs WHERE configName="gymplRole"`, (err, res) => {
+                let role = message.guild.roles.cache.find(role => role.id == res[0].configValue);
+                message.member.roles.add(role);
+            });
+            message.delete();
+        }
     }
 };

@@ -2,7 +2,8 @@ module.exports = {
     name: 'ready', // Funkce která proběhne, když se bot zapne
     once: true, // Proběhne pouze jednou
     execute(client, DB) {
-        console.log(`Ready! Logged in as ${client.user.tag}`); // Napíše do console že je online a svůj user.
+        console.log(`Everything loaded up, bot is ready for use! \n    Prefix is: '!' \n    Bot's user tag is: '${client.user.tag}'`); // Napíše do console že je online a svůj user.
+        console.log("-------------------------------------");
         setInterval(function(){timedUpdate(client, DB);}, 1000 * 3600); // Každou hodinu
         // 797859272473182208
     },
