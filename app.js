@@ -32,6 +32,7 @@ console.log("       ALPHA-Admin discord bot       ");
 console.log("-------------------------------------");
 console.log("Loading:");
 console.log("---|----");
+
 for (const file of eventFiles) { // Projití všech eventů
     console.log(`   |-> discord.js event ${file}`);
     const event = require(`./events/${file}`); // Requirnutí eventu
@@ -77,5 +78,4 @@ DB.connect((err) => {
     console.log(`Succesfully connected to databse '${process.env.DB_NAME}' on '${process.env.DB_IP}' as user '${process.env.DB_USER}'`); // Napsání úspěšného připojení
 });
 
-//guild.members.filter(member => !member.user.bot).size
 client.login(process.env.BOT_TOKEN); // Přihlášení se k discordu, získaným tokenem

@@ -134,7 +134,7 @@ module.exports = {
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount); // nastavení timeout funkce na vyčištění timestamps
 
         try {
-            command.execute(message, args, DB); // Pokus o spuštění příkazů
+            command.execute(message, args, DB, client); // Pokus o spuštění příkazů
         } catch (error) {
             console.error(error); // Blbec proof try catch block, hození error
             message.reply('Někde došlo k chybě a váš příkaz se nepodařilo zpracovat, omlouváme se za problém.'); // Napsání chyby

@@ -1,21 +1,19 @@
 module.exports = {
     name: 'filter',
-    aliases: [],
-    category: 'Music',
-    utilisation: '{prefix}filter [filter name]',
+    description: "Zapne nějaký filtr",
 
-    execute(client, message, args) {
-        if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - You're not in a voice channel !`);
+    execute(message,args,DB,client) {
+        if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);
 
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`${client.emotes.error} - You are not in the same voice channel !`);
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`${client.emotes.error} - Nejsi ve stejném hlasovém kanálu jako já!`);
 
-        if (!client.player.getQueue(message)) return message.channel.send(`${client.emotes.error} - No music currently playing !`);
+        if (!client.player.getQueue(message)) return message.channel.send(`${client.emotes.error} - Aktuálně nic nehraje!`);
 
-        if (!args[0]) return message.channel.send(`${client.emotes.error} - Please specify a valid filter to enable or disable !`);
+        if (!args[0]) return message.channel.send(`${client.emotes.error} - Prosím specifikuj exsistující filtr!`);
 
         const filterToUpdate = client.filters.find((x) => x.toLowerCase() === args[0].toLowerCase());
 
-        if (!filterToUpdate) return message.channel.send(`${client.emotes.error} - This filter doesn't exist, try for example (8D, vibrato, pulsator...) !`);
+        if (!filterToUpdate) return message.channel.send(`${client.emotes.error} - Tento filtr neexsistuje!`);
 
         const filtersUpdated = {};
 
@@ -23,7 +21,7 @@ module.exports = {
 
         client.player.setFilters(message, filtersUpdated);
 
-        if (filtersUpdated[filterToUpdate]) message.channel.send(`${client.emotes.music} - I'm **adding** the filter to the music, please wait... Note : the longer the music is, the longer this will take.`);
-        else message.channel.send(`${client.emotes.music} - I'm **disabling** the filter on the music, please wait... Note : the longer the music is playing, the longer this will take.`);
+        if (filtersUpdated[filterToUpdate]) message.channel.send(`${client.emotes.music} - **Přidávám** filtr na skladbu, čím delší je skladba, tím déle to potrvá`);
+        else message.channel.send(`${client.emotes.music} - **Vypínám** filtr na skladbě`);
     },
 };

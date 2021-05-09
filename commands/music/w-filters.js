@@ -1,15 +1,14 @@
 module.exports = {
     name: 'w-filters',
     aliases: ['filters'],
-    category: 'Music',
-    utilisation: '{prefix}w-filters',
+    description: "Zobrazí exsistující filtry",
 
-    execute(client, message) {
-        if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - You're not in a voice channel !`);
+    execute(message,args,DB,client) {
+        if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);
 
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`${client.emotes.error} - You are not in the same voice channel !`);
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`${client.emotes.error} - Nejsi ve stejném hlasovém kanálu jako já!`);
 
-        if (!client.player.getQueue(message)) return message.channel.send(`${client.emotes.error} - No music currently playing !`);
+        if (!client.player.getQueue(message)) return message.channel.send(`${client.emotes.error} - Aktuálně nic nehraje!`);
 
         const filtersStatuses = [[], []];
 
@@ -21,13 +20,12 @@ module.exports = {
         message.channel.send({
             embed: {
                 color: 'ORANGE',
-                footer: { text: 'This bot uses a Github project made by Zerio (ZerioDev/Music-bot)' },
                 fields: [
-                    { name: 'Filters', value: filtersStatuses[0].join('\n'), inline: true },
+                    { name: 'Filtry', value: filtersStatuses[0].join('\n'), inline: true },
                     { name: '** **', value: filtersStatuses[1].join('\n'), inline: true },
                 ],
                 timestamp: new Date(),
-                description: `List of all filters enabled or disabled.\nUse \`${client.config.discord.prefix}filter\` to add a filter to a song.`,
+                description: `Seznam všech filtrů\nPoužij \`${client.config.discord.prefix}filter\` pro přidání filtru!`,
             },
         });
     },

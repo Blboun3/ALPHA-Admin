@@ -1,20 +1,19 @@
 module.exports = {
     name: 'clear-queue',
+    description:"Smaže všechny skladby z fronty",
     aliases: ['cq'],
-    category: 'Music',
-    utilisation: '{prefix}clear-queue',
 
-    execute(client, message) {
-        if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - You're not in a voice channel !`);
+    execute(message,args,DB,client) {
+        if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);
 
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`${client.emotes.error} - You are not in the same voice channel !`);
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`${client.emotes.error} - Nejsi ve stejném hlasovém kanálu jako já!`);
 
-        if (!client.player.getQueue(message)) return message.channel.send(`${client.emotes.error} - No music currently playing !`);
+        if (!client.player.getQueue(message)) return message.channel.send(`${client.emotes.error} - Aktuálně nic nehraje!`);
 
-        if (client.player.getQueue(message).tracks.length <= 1) return message.channel.send(`${client.emotes.error} - There is only one song in the queue.`);
+        if (client.player.getQueue(message).tracks.length <= 1) return message.channel.send(`${client.emotes.error} - Ve frontě je pouze jedna skladba`);
 
         client.player.clearQueue(message);
 
-        message.channel.send(`${client.emotes.success} - The queue has just been **removed** !`);
+        message.channel.send(`${client.emotes.success} - Fronta byla **odstraněna**!`);
     },
 };
