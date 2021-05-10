@@ -9,7 +9,7 @@ module.exports = {
 
         if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`${client.emotes.error} - Nejsi ve stejném hlasovém kanálu jako já!`);
 
-        if (!args[0]) return message.channel.send(`${client.emotes.error} - Musíš mi nějak sdělit, co mám hrát!`);
+        if (!args[0]) return message.channel.send(`${client.emotes.error} - Musíš mi nějak sdělit, co mám hledat!`);
 
         client.player.play(message, args.join(" "));
     },

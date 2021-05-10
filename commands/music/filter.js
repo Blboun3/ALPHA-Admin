@@ -1,6 +1,7 @@
 module.exports = {
     name: 'filter',
-    description: "Zapne nějaký filtr",
+    aliases: ["f"],
+    description: "Zapne nějaký filtr na zvuk, jako například bassboost, vibrato, treble.",
 
     execute(message,args,DB,client) {
         if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);

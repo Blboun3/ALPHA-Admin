@@ -14,7 +14,7 @@ module.exports = {
             if (err) throw err; // Vyhození erroru
             DB.query(`DELETE FROM warns WHERE warnID="${args[0]}"`, (errII, resultII) => { // Smazání warnu z DB
                 if (errII) throw errII; // error
-                return message.channel.send(`Uživateli <@!${result[0].userID}> byl odebrán warn ${args[0]} za "${result[0].reason}"`); // Napsání, že uživateli byl odebrán warn za <důvod>
+                return message.channel.send(`${client.emojis.success} - Uživateli <@!${result[0].userID}> byl odebrán warn ${args[0]} za \`${result[0].reason}\`!`); // Napsání, že uživateli byl odebrán warn za <důvod>
             });
         });
     },

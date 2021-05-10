@@ -1,21 +1,21 @@
 module.exports = (client, error, message, ...args) => {
     switch (error) {
         case 'NotPlaying':
-            message.channel.send(`${client.emotes.error} - There is no music being played on this server !`);
+            message.channel.send(`${client.emotes.error} - Aktuálně na tomto serveru nehraje žádny hudba!`);
             break;
         case 'NotConnected':
-            message.channel.send(`${client.emotes.error} - You are not connected in any voice channel !`);
+            message.channel.send(`${client.emotes.error} - Vypadá to, že nejsi připojený v žádném hlasovém kanále!`);
             break;
         case 'UnableToJoin':
-            message.channel.send(`${client.emotes.error} - I am not able to join your voice channel, please check my permissions !`);
+            message.channel.send(`${client.emotes.error} - Nemohu se připojit do tvého hlasového kanálu, protoŹe postrádám správná oprávnění!`);
             break;
         case 'VideoUnavailable':
-            message.channel.send(`${client.emotes.error} - ${args[0].title} is not available in your country! Skipping...`);
+            message.channel.send(`${client.emotes.error} - ${args[0].title} není dostupná ve vaší zemí! Přeskakuji...`);
             break;
         case 'MusicStarting':
-            message.channel.send(`The music is starting... please wait and retry!`);
+            message.channel.send(`Hudba se spouští... prosím počkejte, a zkuste to znovu později!`);
             break;
         default:
-            message.channel.send(`${client.emotes.error} - Something went wrong ... Error : ${error}`);
+            message.channel.send(`${client.emotes.error} - Něco se podělalo ... Error : ${error}`);
     };
 };

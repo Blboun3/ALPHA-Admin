@@ -1,7 +1,7 @@
 module.exports = {
     name: 'loop',
     description: "Spustí opakování skladby nebo playlistu",
-    aliases: ['lp', 'repeat'],
+    aliases: ['lp', 'repeat', 'l'],
 
     execute(message,args,DB,client) {
         if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);
@@ -24,7 +24,7 @@ module.exports = {
                 return message.channel.send(`${client.emotes.success} - Opakování skladby je **vypnuté**!`);
             } else {
                 client.player.setRepeatMode(message, true);
-                return message.channel.send(`${client.emotes.success} - Opakování sklaby je **zepnuté** aktuální skladba se bude nekonečně opakovat!`);
+                return message.channel.send(`${client.emotes.success} - Opakování sklaby je **zapnuté** aktuální skladba se bude nekonečně opakovat!`);
             };
         };
     },

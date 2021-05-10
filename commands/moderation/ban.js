@@ -12,7 +12,7 @@ module.exports = {
 
         const taggedUser = message.mentions.members.first(); // vybrání a uložení prvního označeného uživatele
         const userID = taggedUser.id; // ID uživatele
-        taggedUser.ban(args[1]); // dá ban danému uživateli, argument 1 je důvod, zobrazitelný v audit logu
+        taggedUser.ban(args.join(" ")); // dá ban danému uživateli, argument 1 je důvod, zobrazitelný v audit logu
         message.channel.send(`Dal jsi ban: <@!${userID}>`); // Napsání, že daný uživatel byl zabanován
     },
 };

@@ -43,6 +43,7 @@ for (const file of eventFiles) { // Projití všech eventů
     }
 }
 
+// Přidání player věcí
 for (const file of player) {
     console.log(`   |-> discord-player event ${file}`);
     const event = require(`./player/${file}`);

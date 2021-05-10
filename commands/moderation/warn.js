@@ -20,9 +20,9 @@ module.exports = {
             d.getSeconds()
         ].join(':') + '"';  // Zpracování data do správného formátu kvůli DB
 
-        DB.query(`INSERT INTO warns (warnDate, userID, warnAuthor, reason) VALUES ( ${thisDate}, ${taggedUser.id}, ${message.author.id},"${args[1]}")`, (err, result) => { // Zapsání warnu do DB
+        DB.query(`INSERT INTO warns (warnDate, userID, warnAuthor, reason) VALUES ( ${thisDate}, ${taggedUser.id}, ${message.author.id},"${args.slice(1).join(" ")}")`, (err, result) => { // Zapsání warnu do DB
             if (err) throw err; // Vyhození error
-            return message.channel.send(`Uživatel <@!${taggedUser.id}> byl varován z důvodu ${args[1]}`); // Napsání, že uživatel byl varován
+            return message.channel.send(`${client.emojis.success} - Uživatel <@!${taggedUser.id}> byl varován z důvodu \`${args.slice(1).join(" ")}\`!`); // Napsání, že uživatel byl varován
         });
     },
 }

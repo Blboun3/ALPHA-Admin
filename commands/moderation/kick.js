@@ -12,7 +12,7 @@ module.exports = {
 
         const taggedUser = message.mentions.members.first(); // Vybrání prnvího označeného člena
         const memberID = taggedUser.id; // ID daného uživatele
-        taggedUser.kick(args[1]); // Vykopnutí daného uživatele, argument 1 je důvod viditelný v audit logu
+        taggedUser.kick(args.join(" ")); // Vykopnutí daného uživatele, argument 1 je důvod viditelný v audit logu
         return message.channel.send(`Kicknul jsi: <@!${userID}>`); // Napsání, že daný uživatel byl vykopnut
     },
 };

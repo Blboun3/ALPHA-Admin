@@ -1,3 +1,3 @@
 module.exports = (client, message, queue) => {
-    message.channel.send(`${client.emotes.error} - Music stopped as there is no more member in the voice channel !`);
+    message.channel.send(`${client.emotes.error} - Hudba přestala hrát, protože jste mě tu opustili!`);
 };

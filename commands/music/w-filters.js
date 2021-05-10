@@ -25,7 +25,7 @@ module.exports = {
                     { name: '** **', value: filtersStatuses[1].join('\n'), inline: true },
                 ],
                 timestamp: new Date(),
-                description: `Seznam všech filtrů\nPoužij \`${client.config.discord.prefix}filter\` pro přidání filtru!`,
+                description: `Seznam všech filtrů\nPoužij \`!filter\` pro přidání filtru!`,
             },
         });
     },
