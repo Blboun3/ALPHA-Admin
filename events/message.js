@@ -53,7 +53,7 @@ module.exports = {
                                             message.react("☑️");
                                         }else{ // Není new best
                                             DB.query(`UPDATE counting SET value="${message.author.id}" WHERE variable="lastAuthor"`); // aktualizování posledního počtáře
-                                            DB.query(`UPDATE counting SET value="${resultI[0].value + 1}" WHERE variable="thisNumber"`); // aktualizování aktuálního čísĺa
+                                            DB.query(`UPDATE counting SET value="${parseInt(resultI[0].value + 1)}" WHERE variable="thisNumber"`); // aktualizování aktuálního čísĺa
                                             message.react("✅");
                                         }
                                     });
@@ -147,5 +147,5 @@ function fib(number){
     var top1 = Math.pow(((1+Math.sqrt(5))/2), number);
     var top2 = Math.pow(((1-Math.sqrt(5))/2), number);
     var fibNr = (top1 - top2)/Math.sqrt(5);
-    return fibNr;
+    return Math.round(fibNr);
 }
