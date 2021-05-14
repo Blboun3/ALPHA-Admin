@@ -2,6 +2,7 @@ module.exports = {
     name: 'clear-queue',
     description:"Smaže všechny skladby z fronty",
     aliases: ['cq'],
+    guildOnly: true, // spustitelný pouze na serveru
 
     execute(message,args,DB,client) {
         if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);

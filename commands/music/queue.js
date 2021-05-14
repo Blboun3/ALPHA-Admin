@@ -2,6 +2,7 @@ module.exports = {
     name: 'queue',
     description:"zobrazí frontu",
     aliases: ["q","que"],
+    guildOnly: true, // spustitelný pouze na serveru
     execute(message,args,DB,client) {
         if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanále!`);
 

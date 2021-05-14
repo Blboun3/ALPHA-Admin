@@ -3,7 +3,7 @@ module.exports = {
     description: "Pustí nějakou skladbu",
     aliases: ['p'],
     usage: '[name/url]',
-    guildOnly: true,
+    guildOnly: true, // spustitelný pouze na serveru
     timeout: 5,
     execute(message,args,DB,client) {
         if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);

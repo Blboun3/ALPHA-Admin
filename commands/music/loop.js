@@ -2,6 +2,7 @@ module.exports = {
     name: 'loop',
     description: "Spustí opakování skladby nebo playlistu",
     aliases: ['lp', 'repeat', 'l'],
+    guildOnly: true, // spustitelný pouze na serveru
 
     execute(message,args,DB,client) {
         if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);

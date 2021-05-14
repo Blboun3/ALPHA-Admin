@@ -53,7 +53,7 @@ module.exports = {
                                             message.react("☑️");
                                         }else{ // Není new best
                                             DB.query(`UPDATE counting SET value="${message.author.id}" WHERE variable="lastAuthor"`); // aktualizování posledního počtáře
-                                            DB.query(`UPDATE counting SET value="${parseInt(resultI[0].value + 1)}" WHERE variable="thisNumber"`); // aktualizování aktuálního čísĺa
+                                            DB.query(`UPDATE counting SET value="${parseInt(resultI[0].value) + 1}" WHERE variable="thisNumber"`); // aktualizování aktuálního čísĺa
                                             message.react("✅");
                                         }
                                     });

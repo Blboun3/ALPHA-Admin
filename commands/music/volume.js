@@ -3,6 +3,7 @@ module.exports = {
     description: "Změní hlasitost",
     aliases: ["vol"],
     utilisation: '[volume 1-100]',
+    guildOnly: true, // spustitelný pouze na serveru
 
     execute(message,args,DB,client) {
         if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);

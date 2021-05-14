@@ -2,6 +2,7 @@ module.exports = {
     name: 'filter',
     aliases: ["f"],
     description: "Zapne nějaký filtr na zvuk, jako například bassboost, vibrato, treble.",
+    guildOnly: true, // spustitelný pouze na serveru
 
     execute(message,args,DB,client) {
         if (!message.member.voice.channel) return message.channel.send(`${client.emotes.error} - Nejsi v žádném hlasovém kanálu!`);
