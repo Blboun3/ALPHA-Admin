@@ -34,14 +34,35 @@ async function execute(datain, channel, client) {
         table: { width: 2, color: "#aaa" }
     },
     cell: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "bold",
         fontFamily: "sans-serif",
-        color: "#444444",
+        color: "#666666",
         lineHeight: 1.4,
         padding: 5,
-        textAlign: "left"
-    }
+        textAlign: "left",
+        multiline: true
+    },
+    title: {
+        fontSize: 22,
+        fontWeight: "bold",
+        fontFamily: "sans-serif",
+        color: "#666666",
+        lineHeight: 1,
+        multiline: true,
+        // text: "",
+        textAlign: "center"
+    },
+    header: {
+        fontSize: 22,
+        fontWeight: "bold",
+        fontFamily: "sans-serif",
+        color: "#000000",
+        lineHeight: 1.2,
+        multiline: true,
+        textAlign: "Center",
+        padding: 5
+    },
   }
   const ct = new tables.CanvasTable(canvas, { columns, data, options}); // Připravení k vytvoření tabulky
   await ct.generateTable();
