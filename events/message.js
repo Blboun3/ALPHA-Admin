@@ -124,7 +124,7 @@ module.exports = {
         if (timestamps.has(message.author.id)) { // jestliže autor použil příkaz ??
             const expirationTime = timestamps.get(message.author.id) + cooldownAmount; // kolik ještě
 
-            if (now < expirationTime) { // Jestli je na cooldownu
+            if (now < expirationTime || message.author.hasPermissions("ADMINISTRATOR")) { // Jestli je na cooldownu
                 const timeLeft = (expirationTime - now) / 1000; // přepočítání na sekundy
                 return message.reply(`Prosím počkej ${timeLeft.toFixed(1)} sekund před použitím \`${command.name}\` znovu.`);
             }

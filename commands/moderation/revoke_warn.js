@@ -1,6 +1,6 @@
 module.exports = {
     name: 'revoke-warn', // Jméno
-    aliases: ["rwarn"], // Aliasy
+    aliases: ["rwarn", "rw"], // Aliasy
     description: 'Smaže warn podle warnID', // Popis
     usage: "<warnID>", // Použití
     args: "true", // Má argumenty ?
