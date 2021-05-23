@@ -28,6 +28,7 @@
         "discord-player": "^4.0.6",
         "discord.js": "^12.5.3",
         "dotenv": "^8.2.0",
+        "ffmpeg-static": "^4.3.0",
         "install": "^0.13.0",
         "mysql2": "^2.2.5",
         "npm": "^7.12.0",

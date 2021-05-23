@@ -5,7 +5,7 @@ module.exports = {
     args: "true", // má argumenty ?
     guildOnly: "true", // Použitelný pouze na serveru
     permissions: 'KICK_MEMBERS', // Nutná oprávnéní
-    execute(message, args, DB) { // argumenty: zpráva, argumetny, databáze
+    execute(message, args, DB, client) { // argumenty: zpráva, argumetny, databáze
         if (!message.mentions.users.size) { // Pokud není označený žádný člověk
             return message.channel.send('Musíš označit nějakého uživatele'); 
         }
@@ -22,7 +22,7 @@ module.exports = {
 
         DB.query(`INSERT INTO warns (warnDate, userID, warnAuthor, reason) VALUES ( ${thisDate}, ${taggedUser.id}, ${message.author.id},"${args.slice(1).join(" ")}")`, (err, result) => { // Zapsání warnu do DB
             if (err) throw err; // Vyhození error
-            return message.channel.send(`${client.emojis.success} - Uživatel <@!${taggedUser.id}> byl varován z důvodu \`${args.slice(1).join(" ")}\`!`); // Napsání, že uživatel byl varován
+            return message.channel.send(`Uživatel <@!${taggedUser.id}> byl varován z důvodu \`${args.slice(1).join(" ")}\`!`); // Napsání, že uživatel byl varován
         });
     },
 }
