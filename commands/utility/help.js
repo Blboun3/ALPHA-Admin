@@ -2,7 +2,7 @@ module.exports = {
 	name: 'help', // Jméno
 	description:
 		'Vypíše seznam všech příkazů nebo podrobné informace o jednom příkazu', // Popis
-	aliases: ['commands', 'hlp'], // Aliasi fuj české skloňování
+	aliases: ['commands', 'hlp'], // Aliasi
 	usage: '[command name]', // použití
 	cooldown: 5, // Cooldown
 	execute(message, args) {
