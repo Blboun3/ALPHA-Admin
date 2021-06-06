@@ -1,9 +1,11 @@
+const chalk = require('chalk'); // Importování Chalku na zkrášlení výpisu do console
+
 module.exports = {
     name: 'ready', // Funkce která proběhne, když se bot zapne
     once: true, // Proběhne pouze jednou
     execute(client, DB) {
-        console.log(`Everything loaded up, bot is ready for use! \n    Prefix is: '!' \n    Bot's user tag is: '${client.user.tag}'`); // Napíše do console že je online a svůj user.
-        console.log("-------------------------------------");
+        console.log(chalk.green(`Everything loaded up, bot is ready for use! \n    Prefix is: '!' \n    Bot's user tag is: '${client.user.tag}'`)); // Napíše do console že je online a svůj user.
+        console.log(chalk.blue("-------------------------------------"));
         setInterval(function(){timedUpdate(client, DB);}, 1000 * 3600); // Každou hodinu
     },
 };

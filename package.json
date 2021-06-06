@@ -26,6 +26,7 @@
         "@discordjs/opus": "^0.5.0",
         "canvas": "^2.7.0",
         "canvas-table": "^0.0.8",
+        "chalk": "^4.1.1",
         "discord-player": "^4.0.6",
         "discord.js": "^12.5.3",
         "dotenv": "^8.2.0",
