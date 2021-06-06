@@ -5,7 +5,6 @@ module.exports = {
         console.log(`Everything loaded up, bot is ready for use! \n    Prefix is: '!' \n    Bot's user tag is: '${client.user.tag}'`); // Napíše do console že je online a svůj user.
         console.log("-------------------------------------");
         setInterval(function(){timedUpdate(client, DB);}, 1000 * 3600); // Každou hodinu
-        // 797859272473182208
     },
 };
 
@@ -28,6 +27,12 @@ function timedUpdate(client, DB){ // Funkce která proběhne každých 60 minut
             var nowT = new Date();
             var hoursN = nowT.getHours();
             var minN = nowT.getMinutes();
-        });  
-    }); 
+        });
+    });
+    var now = new Date().getHours(); // Získání aktuálního časo
+    if (now >= 5 && now <= 6) { // Pokud je mezi 5 a 6 ráno
+      client.users.fetch('452547916184158218').then(dm => { // Získání uživatele
+        dm.send("Dobré ráno Čubíku") // Poslání Čubíkovi dobré ráno
+      })
+    }
 }
