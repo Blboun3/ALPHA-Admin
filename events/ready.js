@@ -9,7 +9,7 @@ module.exports = {
         console.log(chalk.blue("-------------------------------------"));
 
         // Nastavení, aby funkce na napsání Čubíkovi proběhla každé ráno v 5.00
-        cron.schedule('* 5 * * *', function() { // Spustí se každé ráno v 5
+        cron.schedule('0 5 * * *', function() { // Spustí se každé ráno v 5
           var now = new Date().getHours(); // Získání aktuálního času
             client.users.fetch('452547916184158218').then(dm => { // Získání uživatele
               dm.send("Dobré ráno Čubíku") // Poslání Čubíkovi dobré ráno

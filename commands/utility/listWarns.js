@@ -1,4 +1,4 @@
-const imgGen = require('../../ImageGeneration/Functions/lwarns.js');
+//const imgGen = require('../../ImageGeneration/Functions/lwarns.js');
 
 module.exports = {
     name: 'list-warns', // Jméno
@@ -11,16 +11,15 @@ module.exports = {
                 if (!result.length > 0) { // Pokud nic nenašel
                     return message.channel.send("Vypadá to, že jsi bezúhonný uživatel ALPHY!");
                 }
-                /*
                 var out = "ID | Autor | Důvod | Datum a čas \n" +  // Příprava tabulky výsledků
                         "-------------------------------- \n"
                 for (const element of result) { // Pro každý výsledek
-                    let output = `**${element.warnID}** | <@!${element.warnAuthor}> | ${element.reason} | ${element.warnDate} \n`; // Zformátování
+                    let output = `**${element.warnID}** | ${element.warnAuthor} | ${element.reason} | ${element.warnDate} \n`; // Zformátování
                     out = out + output; // Připsání do výstupu
                 };
                 return message.channel.send(out); // Poslání výsledků
-                */
-                return imgGen(result, message.channel, client); // data,channel,client => vegenerování a poslání obrázku
+
+                //return imgGen(result, message.channel, client); // data,channel,client => vegenerování a poslání obrázku
             });
         } else {
 
@@ -29,18 +28,17 @@ module.exports = {
             DB.query(`SELECT * FROM warns WHERE userID="${taggedUser.id}"`, (err, result) => {
                 if (err) throw err;
                 if(result.length > 0){
-                    /*
                     var out = "ID | Autor | Důvod | Datum a čas \n" +  // Příprava tabulky výsledků
                         "-------------------------------- \n"
                     for (const element of result) { // Pro každý výsledek
-                        let output = `**${element.warnID}** | <@!${element.warnAuthor}> | ${element.reason} | ${element.warnDate} \n`; // Zpracování výsledků
+                        let output = `**${element.warnID}** | ${element.warnAuthor} | ${element.reason} | ${element.warnDate} \n`; // Zpracování výsledků
                         out = out + output; // Připsání k výstupu
                     }
                     return message.channel.send(out); // Poslání výsledků
-                    */
-                    return imgGen(result, message.channel, client); // data,channel,client => vegenerování a poslání obrázku
+
+                    //return imgGen(result, message.channel, client); // data,channel,client => vegenerování a poslání obrázku
                 }
-                return message.channel.send(`Vypadá to, že uživatel <@!${taggedUser.id}> je bezúhonným uživatelem ALPHY!`); // Vypsání informace o bezůhonnosti
+                return message.channel.send(`Vypadá to, že uživatel ${taggedUser.id} je bezúhonným uživatelem ALPHY!`); // Vypsání informace o bezůhonnosti
             });
         }
 
