@@ -13,32 +13,32 @@ module.exports = {
 		if (!args.length) {
 			// pokud nejsou argumenty
 			if (message.channel.type === 'dm') {
-				data.push('Tady je seznam všech příkazů:');
+				data.push('**Tady je seznam všech příkazů:**\n');
 				data.push(commands.map((command) => command.name).join(', ')); // ? IDK
 			} else {
 				data.push(
-					`Tady je seznam všech příkazů, které můžeš používat na serveru ${message.guild.name}:`
+					`**Tady je seznam všech příkazů, které můžeš používat na serveru ${message.guild.name}: **\n`
 				);
 				const authorPerms = message.channel.permissionsFor(message.author); // Permissions autora
 				let tmp = [];
 				commands.forEach((command) => {
 					if (authorPerms.has(command.permissions)) {
-						tmp.push('`' + command.name + '`' + command.description + '\n');
+						tmp.push('`' + command.name + '` - ' + command.description + '\n');
 					}
 				});
-				data.push(tmp);
+				data.push(tmp.toString().replace(/,/g, ''));
 			}
 			data.push(
-				`\nMůžeš napsat \`${__prefix}help [command name]\` aby jsi zjistil podrobnější informace k specifickému příkazu!`
+				`\n**Můžeš napsat \`${__prefix}help [command name]\` aby jsi zjistil podrobnější informace k specifickému příkazu!**`
 			);
 
 			var embed = {
 				color: 0x15fc00,
 				title: 'Příkazy',
-				description: `${data.toString().trim()}`,
+				description: `${data.toString().trim().replace(/,/g, '')}`,
 			};
 			return message.author
-				.send(data)
+				.send({embed: embed})
 				.then(() => {
 					if (message.channel.type === 'dm') return; // Napsání do DM
 					message.reply('Poslal jsem ti DM se seznamem všech příkazů!');
@@ -61,18 +61,19 @@ module.exports = {
 			return message.reply('To není exsistující příkaz'); // Error, pokud příkaz neexsistuje
 		}
 
-		data.push(`**Jméno:** ${command.name}`); // Formátované vypsání
-
-		if (command.aliases) data.push(`**Aliasy:** ${command.aliases.join(', ')}`);
-		if (command.description) data.push(`**Popis:** ${command.description}`);
+		if (command.aliases) data.push(`**Aliasy:** ${command.aliases.join(', ')}\n`);
+		if (command.description) data.push(`**Popis:** ${command.description}\n`);
 		if (command.usage)
-			data.push(`**Použití:** ${__prefix}${command.name} ${command.usage}`);
+			data.push(`**Použití:** ${__prefix}${command.name} ${command.usage}\n`);
 
-		data.push(`**Cooldown:** ${command.cooldown || 3} vteřin`);
+		data.push(`**Cooldown:** ${command.cooldown || 3} vteřin\n`);
 
-		message.channel.send(data, {
-			// Napsání
-			split: true,
-		});
+		var embed = {
+			color: 0x15fc00,
+			title: `Informace o příkazu "${command.name}":`,
+			description: `${data.toString().trim().replace(/,/g, '')}`,
+		};
+
+		message.channel.send({embed: embed});
 	},
 };

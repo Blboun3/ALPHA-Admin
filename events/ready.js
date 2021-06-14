@@ -1,5 +1,6 @@
 const cron = require('node-cron'); // Importování cronu na automatické spouštění
 const chalk = require('chalk'); // Importování Chalku na zkrášlení výpisu do console
+const rss = require('../others/rss.js'); // Importování RSS knihovny, na zpracování RSS hotovo
 
 module.exports = {
     name: 'ready', // Funkce která proběhne, když se bot zapne
@@ -8,6 +9,8 @@ module.exports = {
         console.log(chalk.green(`Everything loaded up, bot is ready for use! \n    Prefix is: '!' \n    Bot's user tag is: '${client.user.tag}'`)); // Napíše do console že je online a svůj user.
         console.log(chalk.blue("-------------------------------------"));
 
+        console.log(rss(client, DB));
+
         // Nastavení, aby funkce na napsání Čubíkovi proběhla každé ráno v 5.00
         cron.schedule('0 5 * * *', function() { // Spustí se každé ráno v 5
           var now = new Date().getHours(); // Získání aktuálního času
@@ -15,7 +18,6 @@ module.exports = {
               dm.send("Dobré ráno Čubíku") // Poslání Čubíkovi dobré ráno
             })
         });
-
         // Nastavení, aby funkce timeUpdate proběhla každou hodinu
         cron.schedule('* * * * *', function() {
           timeUpdate(client, DB);
