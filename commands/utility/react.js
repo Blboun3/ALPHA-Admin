@@ -1,6 +1,6 @@
 module.exports = {
     name: 'react', // Jméno
-    description: 'Udělá reakční zprávu, jako je verifikace', // 
+    description: 'Udělá reakční zprávu, jako je verifikace', //
     usage: '<reactionID>',
     permissions: 'ADMINISTRATOR',
     timeout: 0,
@@ -37,6 +37,25 @@ module.exports = {
             };
             message.channel.send({embed: embed});
             message.delete();
+        }
+        if(args[0] == 4){
+          var embed = {
+            color: 0x15dc00,
+            title: "RSS kanály",
+            description: "**📰: Zprávičky** \nObecné zprávy v češtině \n**🧮: Matematika** \nPravidelné inforamce o matematice \n**🐧: Linux** \nPravidelné informace o dění v Linux světě \n**🐍: Python** \nNovinky ze světa pythonu \n**🇨++: Prostě Cpp** \nInformace o dění kolem C++ \n**📜: NodeJS** \nInformace a novinky kolem NodeJS \n**🇯: Java** \nCo je nového kolem Javy ? \n**🪟: Widnows** \nKdo by je používal ?"
+          };
+          message.channel.send({embed: embed}).then(sent => {
+            sent.react("📰")
+              .then(() => sent.react("🧮"))
+              .then(() => sent.react("🐧"))
+              .then(() => sent.react("🐍"))
+              .then(() => sent.react("🇨"))
+              .then(() => sent.react("📜"))
+              .then(() => sent.react("🇯"))
+              .then(() => sent.react("🪟"))
+              .catch(() => console.error("One or more emojis failed to react"));
+          });
+          message.delete();
         }
     }
 };

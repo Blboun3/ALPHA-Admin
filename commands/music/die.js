@@ -9,7 +9,7 @@ module.exports = {
     		client.player.stop(message);
     		message.channel.send(`${client.emotes.success} - Opouštím voice roomku na přání uživatele ${message.author.tag}!`);
     	}else{
-    		message.channel.send(`${client.emotes.fail} - Vypadá to, že nejsem v žádné voice roomce!`);
+    		message.channel.send(`${client.emotes.error} - Vypadá to, že nejsem v žádné voice roomce!`);
     	}
     },
 };
