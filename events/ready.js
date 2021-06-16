@@ -14,9 +14,8 @@ module.exports = {
         // Nastavení, aby funkce na napsání Čubíkovi proběhla každé ráno v 5.00
         cron.schedule('0 5 * * *', function() { // Spustí se každé ráno v 5
           var now = new Date().getHours(); // Získání aktuálního času
-            client.users.fetch('452547916184158218').then(dm => { // Získání uživatele
-              dm.send("Dobré ráno Čubíku") // Poslání Čubíkovi dobré ráno
-            })
+            client.users.fetch('452547916184158218').send("Dobré ráno Čubíku"); // Poslání Čubíkovi dobré ráno
+            
         });
         // Nastavení, aby funkce timeUpdate proběhla každou hodinu
         cron.schedule('* * * * *', function() {
