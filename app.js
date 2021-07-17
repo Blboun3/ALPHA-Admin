@@ -3,7 +3,7 @@ ALPHA Admin Discord Bot
 Autor: Blboun3
 Omlouvám se za překlepy v komentářích, doufám, že budou případně dost srozumitelné, pro pochopení kódu-
 */
-
+// cs
 const mysql = require("mysql2"); // Knihovna na pracování s DB, nutná mysql2 !! mysql nemám podporovaný login systém
 const fs = require('fs'); // FileSystem
 const Discord = require('discord.js'); // Knihovna na Discord js

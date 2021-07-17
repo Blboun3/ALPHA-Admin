@@ -3,6 +3,7 @@ module.exports = {
     description: 'Udělá reakční zprávu, jako je verifikace', //
     usage: '<reactionID>',
     permissions: 'ADMINISTRATOR',
+    guildOnly: true,
     timeout: 0,
     execute (message, args, DB) {
         if (args[0] == 1) { // Verifikace
@@ -42,7 +43,7 @@ module.exports = {
           var embed = {
             color: 0x15dc00,
             title: "RSS kanály",
-            description: "**📰: Zprávičky** \nObecné zprávy v češtině \n**🧮: Matematika** \nPravidelné inforamce o matematice \n**🐧: Linux** \nPravidelné informace o dění v Linux světě \n**🐍: Python** \nNovinky ze světa pythonu \n**🇨++: Prostě Cpp** \nInformace o dění kolem C++ \n**📜: NodeJS** \nInformace a novinky kolem NodeJS \n**🇯: Java** \nCo je nového kolem Javy ? \n**🪟: Widnows** \nKdo by je používal ?"
+            description: "**📰: Zprávičky** \nObecné zprávy v češtině \n**🧮: Matematika** \nPravidelné inforamce o matematice \n**🐧: Linux** \nPravidelné informace o dění v Linux světě \n**🐍: Python** \nNovinky ze světa pythonu \n**🇨++: Prostě Cpp** \nInformace o dění kolem C++ \n**📜: NodeJS** \nInformace a novinky kolem NodeJS \n**🇯: Java** \nCo je nového kolem Javy ? \n**🪟: Windows** \nKdo by je používal ?"
           };
           message.channel.send({embed: embed}).then(sent => {
             sent.react("📰")
