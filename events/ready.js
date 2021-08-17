@@ -9,7 +9,7 @@ module.exports = {
         console.log(chalk.green(`Everything loaded up, bot is ready for use! \n    Prefix is: '!' \n    Bot's user tag is: '${client.user.tag}'`)); // Napíše do console že je online a svůj user.
         console.log(chalk.blue("-------------------------------------"));
 
-        await rss(client, DB); // Spuštění RSS cylkus
+        //await rss(client, DB); // Spuštění RSS cylkus
 
         // Nastavení, aby funkce na napsání Čubíkovi proběhla každé ráno v 5.00
         var cubik = cron.schedule('0 5 * * *', function() { // Spustí se každé ráno v 5
