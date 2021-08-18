@@ -5,16 +5,18 @@ Omlouvám se za překlepy v komentářích, doufám, že budou případně dost 
 */
 const mysql = require("mysql2"); // Knihovna na pracování s DB, nutná mysql2 !! mysql nemám podporovaný login systém
 const fs = require('fs'); // FileSystem
-const Discord = require('discord.js'); // Knihovna na Discord js
+const { Client, Intents, Collection } = require('discord.js'); // Knihovna discord.js
 require('dotenv').config() // Dotenv
 const { Player } = require('discord-player');
 const chalk = require('chalk'); // Importování Chalku na zkrášlení výpisu do console
 
-const client = new Discord.Client({
-    partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER', 'MEMBERS'] // Discord bot konfigurace
+const client = new Client({
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER', 'MEMBERS'], // Discord bot konfigurace
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.GUILD_INTEGRATIONS, Intents.FLAGS.GUILD_WEBHOOKS, Intents.FLAGS.GUILD_INVITES, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_PRESENCES,
+              Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MESSAGE_TYPING, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.DIRECT_MESSAGE_REACTIONS, Intents.FLAGS.DIRECT_MESSAGE_TYPING]
 }); // Discord klient
-client.commands = new Discord.Collection(); // příkazy
-client.cooldowns = new Discord.Collection(); // a jejich cooldowny
+client.commands = new Collection(); // příkazy
+client.cooldowns = new Collection(); // a jejich cooldowny
 client.player = new Player(client);
 client.config = require('./others/bot');
 client.emotes = client.config.emojis;

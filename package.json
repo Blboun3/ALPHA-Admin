@@ -28,7 +28,7 @@
         "canvas-table": "^0.0.8",
         "chalk": "^4.1.1",
         "discord-player": "^4.0.6",
-        "discord.js": "^12.5.3",
+        "discord.js": "^13.1.0",
         "dotenv": "^8.2.0",
         "ffmpeg-static": "^4.3.0",
         "install": "^0.13.0",
