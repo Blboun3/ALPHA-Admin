@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const os = require('node:os');
+const { version, version_name } = require('../package.json');
 
 // Function that converts bytes into more human friendly units, used for showing how much RAM does system have
 const convertBytes = function(bytes) {
@@ -55,7 +56,8 @@ module.exports = {
             .setFooter({text: 'ALPHA Admin bot by Blboun3#0084'})
             .addFields(
                 { name: 'Software info', value: `Running on (OS): \`${info.os_type}\` version (kernel): \`${info.os_version}\`\nSystem uptime: \`${info.uptime}\``, inline: true},
-                { name: 'Hardware info', value: `CPU Model: \`${info.cpu_model}\`\nCPU Architecture: \`${info.cpu_arch}\`\nLogical CPUs: \`${info.cpu_count}\`\nTotal system memory: \`${info.os_memory}\``, inline: true}
+                { name: 'Hardware info', value: `CPU Model: \`${info.cpu_model}\`\nCPU Architecture: \`${info.cpu_arch}\`\nLogical CPUs: \`${info.cpu_count}\`\nTotal system memory: \`${info.os_memory}\``, inline: true},
+                { name: 'Bot info', value: `Version: \`${version}\`\nVersion name: \`${version_name}\`\nGithub: [https://github.com/Blboun3/ALPHA-Admin](https://github.com/Blboun3/ALPHA-Admin)`}
             )
 
         // Send embed as ephemeral
