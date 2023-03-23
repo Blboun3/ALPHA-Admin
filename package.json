@@ -1,0 +1,22 @@
+{
+  "name": "alpha-admin",
+  "version": "3.0.0",
+  "description": "Discord admin bot made for ALPHA server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blboun3/ALPHA-Admin.git"
+  },
+  "author": "Blboun3",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Blboun3/ALPHA-Admin/issues"
+  },
+  "homepage": "https://github.com/Blboun3/ALPHA-Admin#readme",
+  "dependencies": {
+    "discord.js": "^14.8.0"
+  }
+}
