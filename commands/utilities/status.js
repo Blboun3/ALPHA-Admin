@@ -50,6 +50,7 @@ module.exports = {
             'os_version' : os.release(),
             'os_memory' : convertBytes(os.totalmem()),
             'uptime' : secondsToTime(os.uptime()),
+            'ping' : interaction.client.ws.ping
 
         };
         // Building embed to send
@@ -64,7 +65,7 @@ module.exports = {
             .addFields(
                 { name: 'Software info', value: `Running on (OS): \`${info.os_type}\` version (kernel): \`${info.os_version}\`\nSystem uptime: \`${info.uptime}\``, inline: true},
                 { name: 'Hardware info', value: `CPU Model: \`${info.cpu_model}\`\nCPU Architecture: \`${info.cpu_arch}\`\nLogical CPUs: \`${info.cpu_count}\`\nTotal system memory: \`${info.os_memory}\``, inline: true},
-                { name: 'Bot info', value: `Version: \`${version}\`\nVersion name: \`${version_name}\`\nGithub: [https://github.com/Blboun3/ALPHA-Admin](https://github.com/Blboun3/ALPHA-Admin)`}
+                { name: 'Bot info', value: `Ping: \`${info.ping}ms\`\nVersion: \`${version}\`\nVersion name: \`${version_name}\`\nGithub: [https://github.com/Blboun3/ALPHA-Admin](https://github.com/Blboun3/ALPHA-Admin)`}
             )
 
     // Send private or public response depenending on user's choice

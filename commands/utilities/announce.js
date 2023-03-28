@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits} = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, channelLink, ChannelType} = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -9,7 +9,8 @@ module.exports = {
         option
             .setName('chnl')
             .setDescription('Channel where to announce.')
-            .setRequired(true))
+            .setRequired(true)
+            .addChannelTypes(ChannelType.GuildAnnouncement, ChannelType.GuildText))
     .addStringOption(option =>
         option
             .setName('title')
@@ -27,12 +28,15 @@ module.exports = {
             .setRequired(false))
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
 	async execute(interaction) {
+        
+        // Load all the data
         const chnl = await interaction.options.getChannel('chnl');
         const content = await interaction.options.getString('content');
         const title = await interaction.options.getString('title');
         const raw_hide = await interaction.options.getBoolean('hide');
         const hide = 0 ? raw_hide === null: false | raw_hide
 
+        // Build embed
         const embed = new EmbedBuilder()
             .setTitle(`${title}`)
             .setColor('#8730A6')
@@ -44,8 +48,14 @@ module.exports = {
                 embed.setAuthor({name: interaction.member.displayName, iconURL: interaction.member.displayAvatarURL()});
             }
 
-        await chnl.send({embeds: [embed]});
-        
+        // Send embed
+        try {
+            await chnl.send({embeds: [embed]});   
+        } catch (error) {
+            return await interaction.reply('Ooops, it looks like I don\'t have permissions to write to that channel!')
+        } 
+        // Reply that action happened
         await interaction.reply(`Your message was successfully announced!`);
+            
 	},
 };
