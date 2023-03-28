@@ -1,6 +1,6 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const os = require('node:os');
-const { version, version_name } = require('../package.json');
+const { version, version_name } = require('../../package.json');
 
 // Function that converts bytes into more human friendly units, used for showing how much RAM does system have
 const convertBytes = function(bytes) {
@@ -32,7 +32,14 @@ const secondsToTime = function(g_seconds) {
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('status')
-		.setDescription('Replies with current status of the bot.'),
+		.setDescription('Replies with current status of the bot.')
+    .addBooleanOption(option =>
+        option
+          .setName('public')
+          .setDescription('If the output of this command should be displayed publicly or not')
+          .setRequired(false))
+    .setDMPermission(true)
+    .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages),
 	async execute(interaction) {
         // Object holding all system info
         const info = {
@@ -60,7 +67,14 @@ module.exports = {
                 { name: 'Bot info', value: `Version: \`${version}\`\nVersion name: \`${version_name}\`\nGithub: [https://github.com/Blboun3/ALPHA-Admin](https://github.com/Blboun3/ALPHA-Admin)`}
             )
 
-        // Send embed as ephemeral
-		await interaction.reply({embeds: [embed], ephemeral: true});
+    // Send private or public response depenending on user's choice
+    const ephe = interaction.options.getBoolean('public');
+    if(ephe != true){
+      // Send embed as ephemeral
+		  await interaction.reply({embeds: [embed], ephemeral: true});
+    } else {
+      // Send same embed but not as ephemeral
+      await interaction.reply({embeds: [embed], ephemeral: false});
+    }
 	},
 };
