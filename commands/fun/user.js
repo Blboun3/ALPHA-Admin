@@ -25,12 +25,11 @@ module.exports = {
             'pfp' : aboutUser.avatarURL(),
             'createdAt' : new Date(Date.parse(aboutUser.createdAt)).toUTCString(),
             'age' : new Date((Date.now() - Date.parse(aboutUser.createdAt))),
-            'accentColor' : aboutUser.accentColor
         };
 
         const embed = new EmbedBuilder()
             .setTitle(`\`${info.username}#${info.discriminator}\` info`)
-            .setDescription(`Username: \`${info.username}\`\nDiscriminator: \`${info.discriminator}\`\nID: \`${info.id}\`\nAccount created at: \`${info.createdAt}\`\nAccent color: \`${info.accentColor}\`\nPFP link: [${info.pfp}](${info.pfp})`)
+            .setDescription(`Username: \`${info.username}\`\nDiscriminator: \`${info.discriminator}\`\nID: \`${info.id}\`\nAccount created at: \`${info.createdAt}\`\nPFP link: [${info.pfp}](${info.pfp})`)
             .setThumbnail(info.pfp)
             .setTimestamp()
             .setColor('#EFAD7B')
