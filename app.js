@@ -6,9 +6,8 @@ Autor: Blboun3
 // Import libraries
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { token } = require('./config.json');
-
 // Create a new bot
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -37,8 +36,33 @@ for (const folder of commandFolders) {
 
 // If interaction and is command
 client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isChatInputCommand()) return;
+	if (!(interaction.isChatInputCommand() || interaction.isModalSubmit())) return;
 	//console.log(interaction);
+
+	// Modal submit => role application request
+	if(interaction.isModalSubmit()){
+		// If it isn't application_request
+		if(!(interaction.customId === 'application_request_dif' || interaction.customId === 'application_request_vip' || interaction.customId === 'application_request_mod')) return;
+		try {
+			const embed = new EmbedBuilder()
+			.setColor('#B35609')
+			.setTitle(`Žádost o roli ${interaction.customId.split('_')[2]}`)
+			.setTimestamp()
+            .setFooter({text: 'ALPHA Admin bot by Blboun3#0084'})
+
+		if(interaction.customId === 'application_request_dif'){
+			embed.setDescription(`Uživatel podal žádost o roli.\n\n**Jméno:**${interaction.fields.getTextInputValue('applicant_name')}\`\n**Uživatel:** <@${interaction.user.id}>\n**Vlastní role:** \`\`\`${interaction.fields.getTextInputValue('applicant_cust_role')}\`\`\`\n**Důvody proč mu roli udělit:** \`\`\`${interaction.fields.getTextInputValue('applicant_reasons')}\`\`\`\n**Jeho zájmy na tomto serveru:** \`${interaction.fields.getTextInputValue('applicant_focuses')}\``)
+		} else {
+			embed.setDescription(`Uživatel podal žádost o roli.\n\n**Jméno:**\`${interaction.fields.getTextInputValue('applicant_name')}\`\n**Uživatel:** <@${interaction.user.id}>\n**Důvody proč mu roli udělit:** \`\`\`${interaction.fields.getTextInputValue('applicant_reasons')}\`\`\`\n**Jeho zájmy na tomto serveru:** \`\`\`${interaction.fields.getTextInputValue('applicant_focuses')}\`\`\``)
+		}
+		interaction.guild.channels.cache.get('1090719329546424450').send({embeds: [embed]})
+		} catch (error) {
+			await interaction.reply({content: "Vaši žádost se bohužel nepodařilo odeslat, zkuste to prosím později.\nDěkujeme vám za zájem!", ephemeral: true})
+			return;
+		}
+		await interaction.reply({content: "Vaše žádost byla úspěšně odeslána.\nDěkujeme vám za zájem!", ephemeral: true})
+	}
+
     const command = interaction.client.commands.get(interaction.commandName);
 
 	if (!command) {
