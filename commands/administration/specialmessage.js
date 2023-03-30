@@ -9,7 +9,6 @@ module.exports = {
             subcommand
                 .setName('roles')
                 .setDescription('Create a message for picking roles.')
-                .addStringOption(option => option.setName('text').setDescription('Text prompt above the selection itself').setRequired(true))
                 .addChannelOption(option => option.setName('chnl').setDescription('In which channel should the message with the selection be sent in.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement, ChannelType.GuildText)))
         .addSubcommand(subcommand =>
             subcommand
@@ -50,15 +49,18 @@ module.exports = {
                     new StringSelectMenuBuilder()
                         .setCustomId('public_role_selector')
                         .setPlaceholder('Prosím vyberte')
-                        .setMaxValues(6)
+                        .setMaxValues(4)
                         .setMinValues(1)
                         .addOptions([
                             {label: "Matematika", description: "Pro ty, které zajímá matematika", value:"797851116935184384"},
                             {label: 'Programování', description: "Pro ty, které zajímá programování a počítače", value: "797851517222125590"},
                             {label: "Elektronika", description: "Pro ty, které zajímá elektronika a elektro bastlení", value: '797851702292119583'},
-                            {label: "Fyzika", description: "Pro ty, které zajímá fyzika", value:""}
+                            {label: "Fyzika", description: "Pro ty, které zajímá fyzika", value:"797851555143221248"},
+                            {label: "Žádné", description: "Žádná z možností není mým zájmem", value: "1"}
                         ])
                 )
+            chnl.send({content: "Zde si můžete nastavit role dle svých zájmů", components: [row]});
+            await interaction.reply({content: "Roles selection messages was successfully sent to your desired channel."})
         }
 
 	},

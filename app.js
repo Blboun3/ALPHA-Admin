@@ -8,6 +8,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { token } = require('./config.json');
+const {allRoles, application_requests } = require('./public_config.json')
 // Create a new bot
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -36,7 +37,7 @@ for (const folder of commandFolders) {
 
 // If interaction and is command
 client.on(Events.InteractionCreate, async interaction => {
-	if (!(interaction.isChatInputCommand() || interaction.isModalSubmit())) return;
+	if (!(interaction.isChatInputCommand() || interaction.isModalSubmit() || interaction.isStringSelectMenu())) return;
 	//console.log(interaction);
 
 	// Modal submit => role application request
@@ -63,7 +64,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 
 		// Get channel where to send request
-		interaction.guild.channels.cache.get('1090719329546424450').send({embeds: [embed]})
+		interaction.guild.channels.cache.get(application_requests).send({embeds: [embed]})
 
 		// Error handling
 		} catch (error) {
@@ -73,6 +74,48 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 		// If everything went ok => respond with ok ( XD )
 		await interaction.reply({content: "Vaše žádost byla úspěšně odeslána.\nDěkujeme vám za zájem!", ephemeral: true})
+	}
+
+	// String menu selection
+	if(interaction.isStringSelectMenu()) {
+		// Role selector
+		if(!interaction.customId === 'public_role_selector') return;
+		// Get user roles and selected roles
+		const userRoles = interaction.member.roles;
+		const roles = interaction.values;
+
+		// If it includes 1 => None - remove all roles
+		if(roles.includes("1")){
+			// Remove all roles from the user
+			allRoles.forEach(element => {
+				// Check if user has the role
+				if(userRoles.cache.has(element)){
+					userRoles.remove(element);
+				}
+			});
+			await interaction.reply({ content: "Vaše role byly aktualizovány", ephemeral: true});
+			return;
+		}
+
+		// If it doesn't include 1 => user wants to change his roles
+		// Go thru all roles
+		allRoles.forEach(element => {
+			// If user already has role
+			if(userRoles.cache.has(element)){
+				// If selected roles includes the role -> user wants that role
+				if(roles.includes(element)) return;
+				// Otherwise user doesn't want that role
+				userRoles.remove(element)
+			} else {
+				// User doesn't have the role
+				// Does he want it ?
+				if(!roles.includes(element)) return;
+				// If yes than give it to him
+				userRoles.add(element);
+			}
+		});
+		await interaction.reply({content: "Vaše role byly aktualizovány.", ephemeral: true})
+		
 	}
 
 	// Command processing
