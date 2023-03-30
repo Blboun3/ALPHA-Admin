@@ -1,4 +1,5 @@
 const { ActionRowBuilder, SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType, StringSelectMenuBuilder } = require('discord.js');
+const {role_selection_options} = require('../../public_config.json')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -14,6 +15,11 @@ module.exports = {
             subcommand
                 .setName('rules')
                 .setDescription('General rules message.')
+                .addChannelOption(option => option.setName('chnl').setDescription('In which channel should the message with the selection be sent in.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement, ChannelType.GuildText)))
+        .addSubcommand(subcommand => 
+            subcommand
+                .setName('verify')
+                .setDescription('Verification channel.')
                 .addChannelOption(option => option.setName('chnl').setDescription('In which channel should the message with the selection be sent in.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement, ChannelType.GuildText)))
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 	async execute(interaction) {
@@ -51,15 +57,9 @@ module.exports = {
                         .setPlaceholder('Prosím vyberte')
                         .setMaxValues(4)
                         .setMinValues(1)
-                        .addOptions([
-                            {label: "Matematika", description: "Pro ty, které zajímá matematika", value:"797851116935184384"},
-                            {label: 'Programování', description: "Pro ty, které zajímá programování a počítače", value: "797851517222125590"},
-                            {label: "Elektronika", description: "Pro ty, které zajímá elektronika a elektro bastlení", value: '797851702292119583'},
-                            {label: "Fyzika", description: "Pro ty, které zajímá fyzika", value:"797851555143221248"},
-                            {label: "Žádné", description: "Žádná z možností není mým zájmem", value: "1"}
-                        ])
+                        .addOptions(role_selection_options)
                 )
-            chnl.send({content: "Zde si můžete nastavit role dle svých zájmů", components: [row]});
+            chnl.send({content: "Zde si můžete nastavit role dle svých zájmů:", components: [row]});
             await interaction.reply({content: "Roles selection messages was successfully sent to your desired channel."})
         }
 
