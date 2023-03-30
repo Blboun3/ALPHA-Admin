@@ -42,7 +42,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	// Modal submit => role application request
 	if(interaction.isModalSubmit()){
 		// If it isn't application_request
-		if(!(interaction.customId === 'application_request_dif' || interaction.customId === 'application_request_vip' || interaction.customId === 'application_request_mod')) return;
+		if(!(interaction.customId === 'application_request_dif' || interaction.customId === 'application_request_vip' || interaction.customId === 'application_request_mod' || interaction.customId === 'application_request_hlp')) return;
 		try {
 			const embed = new EmbedBuilder()
 			.setColor('#B35609')
@@ -52,11 +52,15 @@ client.on(Events.InteractionCreate, async interaction => {
 
 		if(interaction.customId === 'application_request_dif'){
 			embed.setDescription(`Uživatel podal žádost o roli.\n\n**Jméno:**${interaction.fields.getTextInputValue('applicant_name')}\`\n**Uživatel:** <@${interaction.user.id}>\n**Vlastní role:** \`\`\`${interaction.fields.getTextInputValue('applicant_cust_role')}\`\`\`\n**Důvody proč mu roli udělit:** \`\`\`${interaction.fields.getTextInputValue('applicant_reasons')}\`\`\`\n**Jeho zájmy na tomto serveru:** \`${interaction.fields.getTextInputValue('applicant_focuses')}\``)
-		} else {
+		} else if(interaction.customId === 'application_request_mod' || interaction.customId === 'application_request_vip') {
 			embed.setDescription(`Uživatel podal žádost o roli.\n\n**Jméno:**\`${interaction.fields.getTextInputValue('applicant_name')}\`\n**Uživatel:** <@${interaction.user.id}>\n**Důvody proč mu roli udělit:** \`\`\`${interaction.fields.getTextInputValue('applicant_reasons')}\`\`\`\n**Jeho zájmy na tomto serveru:** \`\`\`${interaction.fields.getTextInputValue('applicant_focuses')}\`\`\``)
+		} else {
+			embed.setDescription(`Uživatel podal žádost o roli.\n\n**Jméno:**\`${interaction.fields.getTextInputValue('applicant_name')}\`\n**Uživatel:** <@${interaction.user.id}>\n**Kategorie:**\`\`\`${interaction.fields.getTextInputValue('applicant_role_select')}\`\`\`\n**Důvody proč mu roli udělit:** \`\`\`${interaction.fields.getTextInputValue('applicant_reasons')}\`\`\`\n**Jeho zájmy na tomto serveru:** \`\`\`${interaction.fields.getTextInputValue('applicant_focuses')}\`\`\``)
 		}
+
 		interaction.guild.channels.cache.get('1090719329546424450').send({embeds: [embed]})
 		} catch (error) {
+			console.log(error)
 			await interaction.reply({content: "Vaši žádost se bohužel nepodařilo odeslat, zkuste to prosím později.\nDěkujeme vám za zájem!", ephemeral: true})
 			return;
 		}
