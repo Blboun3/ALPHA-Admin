@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType } = require('discord.js');
+const { ActionRowBuilder, SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType, StringSelectMenuBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -18,8 +18,11 @@ module.exports = {
                 .addChannelOption(option => option.setName('chnl').setDescription('In which channel should the message with the selection be sent in.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement, ChannelType.GuildText)))
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 	async execute(interaction) {
+        // Rules option selected
         if(interaction.options.getSubcommand() === 'rules'){
+            // Get channel from command
             const chnl = interaction.options.getChannel('chnl');
+            // Rules in Czech
             const embed_cz = new EmbedBuilder()
                 .setTitle('Pravidla')
                 .setColor('#00ff05')
@@ -27,6 +30,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({text: 'ALPHA Admin bot by Blboun3#0084'})
                 .setAuthor({ name: "ALPHA Admin Team", iconURL: 'https://cdn.discordapp.com/avatars/797862942036721664/ffc64d41e14d5d913c8a543dc4024cef.webp'})
+            // Rules in English
             const embed_en = new EmbedBuilder()
                 .setTitle('Rules')
                 .setColor('#006d01')
@@ -34,8 +38,27 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({text: 'ALPHA Admin bot by Blboun3#0084'})
                 .setAuthor({ name: "ALPHA Admin Team", iconURL: 'https://cdn.discordapp.com/avatars/797862942036721664/ffc64d41e14d5d913c8a543dc4024cef.webp'})
+            // Send to selected channel
             chnl.send({embeds: [embed_cz, embed_en]})
+            // Reply to original interaction so it doesn't fail
             interaction.reply('Rules were sent to your desired channel.')
+        } else if (interaction.options.getSubcommand() === 'roles'){
+            // Get channel from command
+            const chnl = interaction.options.getChannel('chnl');
+            const row = new ActionRowBuilder()
+                .addComponents(
+                    new StringSelectMenuBuilder()
+                        .setCustomId('public_role_selector')
+                        .setPlaceholder('Prosím vyberte')
+                        .setMaxValues(6)
+                        .setMinValues(1)
+                        .addOptions([
+                            {label: "Matematika", description: "Pro ty, které zajímá matematika", value:"797851116935184384"},
+                            {label: 'Programování', description: "Pro ty, které zajímá programování a počítače", value: "797851517222125590"},
+                            {label: "Elektronika", description: "Pro ty, které zajímá elektronika a elektro bastlení", value: '797851702292119583'},
+                            {label: "Fyzika", description: "Pro ty, které zajímá fyzika", value:""}
+                        ])
+                )
         }
 
 	},
