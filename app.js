@@ -6,10 +6,13 @@ Autor: Blboun3
 // Import libraries
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
+var cron = require('node-cron');
+const info = require("./utils/info.js");
+
 // Create a new bot
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
 
 // Collection of commands
 client.commands = new Collection();
@@ -47,6 +50,8 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+
+cron.schedule('30 * * * *', info.execute(client));
 
 // Log bot to discord with token
 client.login(token);
