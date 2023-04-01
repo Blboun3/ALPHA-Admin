@@ -1,11 +1,13 @@
 {
   "name": "alpha-admin",
-  "version": "3.0.5.1",
+  "version": "3.0.6.0",
   "version_name" : "Amélie",
   "description": "Discord admin bot made for ALPHA server",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy-commands": "node deploy_commands.js",
+    "run": "node app.js"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const os = require('node:os');
 const { version, version_name } = require('../../package.json');
+const {generalFooter} = require('../../public_config.json')
 
 // Function that converts bytes into more human friendly units, used for showing how much RAM does system have
 const convertBytes = function(bytes) {
@@ -61,7 +62,7 @@ module.exports = {
             .setAuthor({ name: 'ALPHA', iconURL: 'https://cdn.discordapp.com/avatars/797862942036721664/ffc64d41e14d5d913c8a543dc4024cef.webp', url: 'https://github.com/Blboun3/ALPHA-Admin' })
             .setThumbnail('https://img.icons8.com/neon/256/ok.png')
             .setTimestamp()
-            .setFooter({text: 'ALPHA Admin bot by Blboun3#0084'})
+            .setFooter({text: generalFooter})
             .addFields(
                 { name: 'Software info', value: `Running on (OS): \`${info.os_type}\` version (kernel): \`${info.os_version}\`\nSystem uptime: \`${info.uptime}\``, inline: true},
                 { name: 'Hardware info', value: `CPU Model: \`${info.cpu_model}\`\nCPU Architecture: \`${info.cpu_arch}\`\nLogical CPUs: \`${info.cpu_count}\`\nTotal system memory: \`${info.os_memory}\``, inline: true},

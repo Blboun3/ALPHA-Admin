@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
+const {generalFooter} = require('../../public_config.json')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -33,7 +34,7 @@ module.exports = {
             .setThumbnail(info.pfp)
             .setTimestamp()
             .setColor('#EFAD7B')
-            .setFooter({text: 'ALPHA Admin bot by Blboun3#0084'})
+            .setFooter({text: generalFooter})
 
         await interaction.reply({embeds: [embed], ephemeral: true})
 	},

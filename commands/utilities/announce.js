@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, channelLink, ChannelType} = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType} = require('discord.js');
+const {generalFooter} = require('../../public_config.json')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -42,7 +43,7 @@ module.exports = {
             .setColor('#8730A6')
             .setDescription(`${content.toString().replaceAll('\\n', '\n')}`)
             .setTimestamp()
-            .setFooter({text: 'ALPHA Admin bot by Blboun3#0084'})
+            .setFooter({text: generalFooter})
 
             if(hide != true){
                 embed.setAuthor({name: interaction.member.displayName, iconURL: interaction.member.displayAvatarURL()});
