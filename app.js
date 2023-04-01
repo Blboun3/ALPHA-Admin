@@ -8,7 +8,6 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { token } = require('./config.json');
-const {allRoles, application_requests } = require('./public_config.json')
 // Create a new bot
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -35,6 +34,7 @@ for (const folder of commandFolders) {
 	}
 }
 
+// Process all events
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 

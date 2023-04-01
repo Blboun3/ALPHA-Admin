@@ -1,4 +1,5 @@
-const { Events } = require('discord.js');
+const { Events, EmbedBuilder } = require('discord.js');
+const {allRoles, application_requests } = require('../public_config.json')
 
 module.exports = {
 	name: Events.InteractionCreate,

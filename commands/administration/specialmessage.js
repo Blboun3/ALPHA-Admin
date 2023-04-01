@@ -1,5 +1,5 @@
 const { ActionRowBuilder, SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType, StringSelectMenuBuilder } = require('discord.js');
-const {role_selection_options, generalFooter} = require('../../public_config.json')
+const {role_selection_options, generalFooter, max_roles_selectable} = require('../../public_config.json')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -55,7 +55,7 @@ module.exports = {
                     new StringSelectMenuBuilder()
                         .setCustomId('public_role_selector')
                         .setPlaceholder('Prosím vyberte')
-                        .setMaxValues(4)
+                        .setMaxValues(max_roles_selectable)
                         .setMinValues(1)
                         .addOptions(role_selection_options)
                 )
