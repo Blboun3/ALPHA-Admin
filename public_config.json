@@ -2,6 +2,5 @@
     "allRoles" : ["797851116935184384","797851517222125590","797851702292119583","797851555143221248"],
     "application_requests" : "1090719329546424450",
     "role_selection_options" : [{"label": "Matematika", "description": "Pro ty, které zajímá matematika", "value":"797851116935184384"},{"label": "Programování", "description": "Pro ty, které zajímá programování a počítače", "value": "797851517222125590"},{"label": "Elektronika", "description": "Pro ty, které zajímá elektronika a elektro bastlení", "value": "797851702292119583"},{"label": "Fyzika", "description": "Pro ty, které zajímá fyzika", "value":"797851555143221248"},{"label": "Žádné", "description": "Žádná z možností není mým zájmem", "value": "1"}],
-    "generalFooter" : "ALPHA Admin bot by Blboun3#0084",
-    ]
+    "generalFooter" : "ALPHA Admin bot by Blboun3#0084"
 }
