@@ -51,7 +51,7 @@ for (const file of eventFiles) {
 	}
 }
 
-cron.schedule('30 * * * *', info.execute(client));
+cron.schedule('30 * * * *', () => {info.execute(client)});
 
 // Log bot to discord with token
 client.login(token);
