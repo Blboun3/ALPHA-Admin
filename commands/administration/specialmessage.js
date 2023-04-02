@@ -1,4 +1,4 @@
-const { ActionRowBuilder, SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType, StringSelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const {role_selection_options, generalFooter, max_roles_selectable} = require('../../public_config.json')
 
 module.exports = {
@@ -47,6 +47,7 @@ module.exports = {
             chnl.send({embeds: [embed_cz, embed_en]})
             // Reply to original interaction so it doesn't fail
             interaction.reply('Rules were sent to your desired channel.')
+
         } else if (interaction.options.getSubcommand() === 'roles'){
             // Get channel from command
             const chnl = interaction.options.getChannel('chnl');
@@ -61,6 +62,44 @@ module.exports = {
                 )
             chnl.send({content: "Zde si můžete nastavit role dle svých zájmů:", components: [row]});
             await interaction.reply({content: "Roles selection messages was successfully sent to your desired channel."})
+
+        } else if (interaction.options.getSubcommand('verify')) {
+            // Get channel from command
+            const chnl = interaction.options.getChannel('chnl');
+            // embed with informations about how to verify
+            const embed_cz = new EmbedBuilder()
+                    .setTitle("Ověření")
+                    .setDescription("Z bezpečnostních důvodů musíme ověřit že jste člověk.\nPro ověření prosím klikněte na tlačítko níže.\nV případě jakýchkoliv problémů kontaktuje prosím <@573080354567487499>.")
+                    .setColor('#00ff05')
+                    .setThumbnail('https://cdn3.emoji.gg/emojis/6817_Discord_Verified.png')
+                    .setTimestamp()
+                    .setFooter({text: generalFooter})
+                    .setAuthor({ name: "ALPHA Admin Team", iconURL: 'https://cdn.discordapp.com/avatars/797862942036721664/ffc64d41e14d5d913c8a543dc4024cef.webp'})
+            // embed with informations about how to verify
+            /*const embed_en = new EmbedBuilder()
+                    .setTitle("Verification")
+                    .setDescription("Due to security reasons we have to verify that you are human.\nPlease press button below to begin verification process.\nIn case of any problems please contact <@573080354567487499>.")
+                    .setColor('#006d01')
+                    .setThumbnail('https://cdn3.emoji.gg/emojis/6817_Discord_Verified.png')
+                    .setTimestamp()
+                    .setFooter({text: generalFooter})
+                    .setAuthor({ name: "ALPHA Admin Team", iconURL: 'https://cdn.discordapp.com/avatars/797862942036721664/ffc64d41e14d5d913c8a543dc4024cef.webp'})*/
+
+            // Create the button
+            const row = new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId('verification_btn')
+                        .setLabel("Verify")
+                        .setStyle(ButtonStyle.Success)
+                )
+
+            // Send embed
+            chnl.send({embeds: [embed_cz/*, embed_en*/], components: [row]});
+            // Reply to interaction so discord doesn't make problems
+            await interaction.reply("Message with how to verify was sent to your desired channel.");
+
+            
         }
 
 	},
