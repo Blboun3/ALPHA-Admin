@@ -12,7 +12,7 @@ var cron = require('node-cron');
 const info = require("./utils/info.js");
 
 // Create a new bot
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages, GatewayIntentBits.MessageContent] });
 
 // Collection of commands
 client.commands = new Collection();

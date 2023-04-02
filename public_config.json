@@ -6,5 +6,7 @@
     "generalFooter" : "ALPHA Admin bot by Blboun3#0084",
     "age_display_channel" : "798226729113354250",
     "people_display_channel" : "798226693156372520",
-    "verified_role" : "797852389960843314"
+    "verified_role" : "797852389960843314",
+    "counting_channel": "803889724598386689",
+    "counting_function": {"arguments": "lastMessage, secondLastMessage", "body":"return BigInt(BigInt(lastMessage) + BigInt(secondLastMessage)) || BigInt(1)"}
 }
