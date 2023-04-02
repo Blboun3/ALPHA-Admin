@@ -12,7 +12,7 @@ var cron = require('node-cron');
 const info = require("./utils/info.js");
 
 // Create a new bot
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages] });
 
 // Collection of commands
 client.commands = new Collection();
@@ -51,7 +51,8 @@ for (const file of eventFiles) {
 	}
 }
 
-cron.schedule('30 * * * *', () => {info.execute(client)});
+// Run every 30 minutes
+cron.schedule('30,0 * * * *', () => {info.execute(client)});
 
 // Log bot to discord with token
 client.login(token);

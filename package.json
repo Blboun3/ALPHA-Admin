@@ -1,6 +1,6 @@
 {
   "name": "alpha-admin",
-  "version": "3.8.0",
+  "version": "3.8.1",
   "version_name": "Amélie",
   "description": "Discord admin bot made for ALPHA server",
   "main": "app.js",

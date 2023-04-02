@@ -1,12 +1,12 @@
-const { Events, EmbedBuilder } = require('discord.js');
-const {allRoles, application_requests, verified_role } = require('../public_config.json')
+const {Events} = require('discord.js');
+const { verified_role } = require('../public_config.json')
 const application_request_processor = require('./hlp_application_request');
 const role_selector = require('./hlp_role_selector');
 
 module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
-        if (!(interaction.isChatInputCommand() || interaction.isModalSubmit() || interaction.isStringSelectMenu() || interaction.isButton())) return;
+        //if (!(interaction.isChatInputCommand() || interaction.isModalSubmit() || interaction.isStringSelectMenu() || interaction.isButton())) return;
         //console.log(interaction);
 
         // Verification
