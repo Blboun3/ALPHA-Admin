@@ -12,7 +12,8 @@ module.exports = {
         // Verification
         if(interaction.customId === 'verification_btn'){
             interaction.member.roles.add(verified_role);
-            await interaction.reply(interaction.reply({content: "Verifikace proběhla úspěšně!", ephemeral: true}))
+            await interaction.reply({content: "Verifikace proběhla úspěšně!", ephemeral: true});
+            return 
         }
 
         // Role application request

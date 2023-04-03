@@ -12,6 +12,7 @@ module.exports = {
             message.crosspost();
         }
 
+        // Channel with counting
         if(chnl.id == counting_channel) {
             if(message.author.bot) return
             // Load last 3 messages
