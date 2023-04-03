@@ -7,7 +7,7 @@ module.exports = {
         // Get channel in which message was sent
         const chnl = message.channel;
 
-        // Check if channel is announcements channel
+        // Check if channel is announcements channel (automatically post all announcements)
         if(chnl.type === 5){
             message.crosspost();
         }

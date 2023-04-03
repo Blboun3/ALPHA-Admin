@@ -6,8 +6,9 @@ module.exports = {
 	name: Events.ClientReady,
 	once: true,
 	execute(client) {
+		// Inform user that bot has started
 		console.log(`Ready! Logged in as ${client.user.tag}`);
-		info.execute(client);
+		// Setup cron task for info
 		cron.schedule('30,0 * * * *', () => {info.execute(client)});
 	},
 };

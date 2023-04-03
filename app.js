@@ -50,4 +50,4 @@ for (const file of eventFiles) {
 }
 
 // Log bot to discord with token
-client.login(token)
+client.login(token);

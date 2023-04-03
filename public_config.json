@@ -1,12 +1,13 @@
 {
-    "allRoles" : ["797851116935184384","797851517222125590","797851702292119583","797851555143221248"],
+    "allRoles" : ["797851116935184384","797851517222125590","797851702292119583","797851555143221248", "1092429281579253842"],
     "application_requests" : "1090719329546424450",
-    "max_roles_selectable" : 4,
-    "role_selection_options" : [{"label": "Matematika", "description": "Pro ty, které zajímá matematika", "value":"797851116935184384"},{"label": "Programování", "description": "Pro ty, které zajímá programování a počítače", "value": "797851517222125590"},{"label": "Elektronika", "description": "Pro ty, které zajímá elektronika a elektro bastlení", "value": "797851702292119583"},{"label": "Fyzika", "description": "Pro ty, které zajímá fyzika", "value":"797851555143221248"},{"label": "Žádné", "description": "Žádná z možností není mým zájmem", "value": "1"}],
+    "max_roles_selectable" : 5,
+    "role_selection_options" : [{"label": "Matematika", "description": "Pro ty, které zajímá matematika", "value":"797851116935184384"},{"label": "Programování", "description": "Pro ty, které zajímá programování a počítače", "value": "797851517222125590"},{"label": "Elektronika", "description": "Pro ty, které zajímá elektronika a elektro bastlení", "value": "797851702292119583"},{"label": "Fyzika", "description": "Pro ty, které zajímá fyzika", "value":"797851555143221248"},{"label":"Hudba", "description":"Pro ty, které zajímá hudba", "value":"1092429281579253842"},{"label": "Žádné", "description": "Žádná z možností není mým zájmem", "value": "1"}],
     "generalFooter" : "ALPHA Admin bot by Blboun3#0084",
     "age_display_channel" : "798226729113354250",
     "people_display_channel" : "798226693156372520",
     "verified_role" : "797852389960843314",
     "counting_channel": "803889724598386689",
-    "counting_function": {"arguments": "lastMessage, secondLastMessage", "body":"return BigInt(BigInt(lastMessage) + BigInt(secondLastMessage)) || BigInt(1)"}
+    "counting_function": {"arguments": "lastMessage, secondLastMessage", "body":"return BigInt(BigInt(lastMessage) + BigInt(secondLastMessage)) || BigInt(1)"},
+    "support_category": "798098578211733524"
 }

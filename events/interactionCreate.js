@@ -6,8 +6,6 @@ const role_selector = require('./hlp_role_selector');
 module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
-        //if (!(interaction.isChatInputCommand() || interaction.isModalSubmit() || interaction.isStringSelectMenu() || interaction.isButton())) return;
-        //console.log(interaction);
 
         // Verification
         if(interaction.customId === 'verification_btn'){
@@ -19,11 +17,13 @@ module.exports = {
         // Role application request
         if((interaction.customId === 'application_request_dif' || interaction.customId === 'application_request_vip' || interaction.customId === 'application_request_mod' || interaction.customId === 'application_request_hlp')){
             application_request_processor.execute(interaction);
+            return;
         }
     
         // Public role selector
         if(interaction.customId === 'public_role_selector') {
             role_selector.execute(interaction);
+            return;
         }
     
         // Command processing
