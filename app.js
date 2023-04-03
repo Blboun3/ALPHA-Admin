@@ -8,8 +8,6 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
-var cron = require('node-cron');
-const info = require("./utils/info.js");
 
 // Create a new bot
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages, GatewayIntentBits.MessageContent] });
@@ -51,8 +49,5 @@ for (const file of eventFiles) {
 	}
 }
 
-// Run every 30 minutes
-cron.schedule('30,0 * * * *', () => {info.execute(client)});
-
 // Log bot to discord with token
-client.login(token);
+client.login(token)

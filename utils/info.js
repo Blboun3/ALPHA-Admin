@@ -9,15 +9,19 @@ module.exports = {
             age: 0,
             people: 0
         }
-        
-        // Get guild
+        console.log(guildId);
+        // Get guild, it must be fetched for .createdAt to work
         const guild = await client.guilds.fetch(guildId);
+        if (guild == undefined) {
+            console.error("Guild not found");
+            return;
+        }//run
         // Calculate server age in days
         const now = new Date();
         const createdAt = guild.createdAt;
-        data.age = parseInt((now - createdAt) / (1000 * 60 * 60 * 24));
+        data.age = ((now - createdAt) / (1000 * 60 * 60 * 24)) | 0;
         // Get approximate count of people on the server
-        data.people = guild.approximateMemberCount;
+        data.people = guild.memberCount;
 
         // Get channels to rename to work as information
         const age_channel = await guild.channels.fetch(age_display_channel);
