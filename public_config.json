@@ -9,5 +9,6 @@
     "verified_role" : "797852389960843314",
     "counting_channel": "803889724598386689",
     "counting_function": {"arguments": "lastMessage, secondLastMessage", "body":"return BigInt(BigInt(lastMessage) + BigInt(secondLastMessage)) || BigInt(1)"},
-    "support_category": "798098578211733524"
+    "support_category": "798098578211733524",
+    "welcome_channel": "797855765334327306"
 }

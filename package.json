@@ -1,7 +1,7 @@
 {
   "name": "alpha-admin",
-  "version": "3.9.4",
-  "version_name": "Amélie",
+  "version": "4.0.0",
+  "version_name": "La Quintessenza",
   "description": "Discord admin bot made for ALPHA server",
   "main": "app.js",
   "scripts": {
