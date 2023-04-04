@@ -1,4 +1,5 @@
 const {application_requests} = require('../public_config.json')
+const logger = require('../utils/logger');
 
 module.exports = {
     name: "application_request_processor",
@@ -26,11 +27,13 @@ module.exports = {
 
         // Error handling
         } catch (error) {
-            console.log(error)
+            const child = logger.child({error: error.toString()})
+            child.error(`Unable to send application for role by user ${interaction.member.id}`)
             await interaction.reply({content: "Vaši žádost se bohužel nepodařilo odeslat, zkuste to prosím později.\nDěkujeme vám za zájem!", ephemeral: true})
             return;
         }
         // If everything went ok => respond with ok ( XD )
+        logger.info(`Role application by user ${interaction.member.id} was sent successfuly`)
         await interaction.reply({content: "Vaše žádost byla úspěšně odeslána.\nDěkujeme vám za zájem!", ephemeral: true})
     }
 }

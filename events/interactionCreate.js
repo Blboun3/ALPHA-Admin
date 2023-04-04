@@ -5,6 +5,7 @@ const { request } = require('undici');
 const role_selector = require('./hlp_role_selector');
 const Canvas = require('@napi-rs/canvas');
 const { GlobalFonts } = require('@napi-rs/canvas');
+const logger = require('../utils/logger');
 
 // Pass the entire Canvas object because you'll need access to its width and context
 const applyText = (canvas, text) => {
@@ -30,7 +31,7 @@ module.exports = {
         if(interaction.customId === 'verification_btn'){
             // Give user verified role
             interaction.member.roles.add(verified_role);
-
+            logger.debug(`User ${interaction.member.id} was verified`)
             // Get welcome channel (where to send message about his appearance)
             const chnl = interaction.guild.channels.cache.get(welcome_channel)
             
@@ -73,8 +74,13 @@ module.exports = {
             context.drawImage(avatar, 25, 25, 200, 200);
 
             const attachment = new AttachmentBuilder(await canvas.encode('png'), { name: `welcome-user.png` });
-            console.log(`User ${interaction.user.displayName} was verified`);
-            chnl.send({content: `Vítej na ALPHĚ, <@${interaction.user.id}> - největším českém matematicko-programátorském serveru!`, files: [attachment]})
+            
+            try {
+                chnl.send({content: `Vítej na ALPHĚ, <@${interaction.user.id}> - největším českém matematicko-programátorském serveru!`, files: [attachment]})   
+            } catch (error) {
+                const child = logger.child({error: error.toString()})
+                child.error("Error while sending welcome image")
+            }
 
             // Reply to user that verification was successfull (also so that discord doesn't have any problems XD)
             await interaction.reply({content: "Verifikace proběhla úspěšně!", ephemeral: true});
