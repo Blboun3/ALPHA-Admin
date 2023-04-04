@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType, TextInputBuilder, TextInputStyle, ModalBuilder, ActionRowBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, TextInputBuilder, TextInputStyle, ModalBuilder, ActionRowBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()

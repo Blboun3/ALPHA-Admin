@@ -117,3 +117,8 @@ dist
 
 # config.json file due to it containing bot token
 config.json
+log.*
+log.json
+*.log
+
+.vscode

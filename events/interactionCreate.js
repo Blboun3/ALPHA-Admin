@@ -112,12 +112,13 @@ module.exports = {
             await command.execute(interaction);
         // Error handling
         } catch (error) {
-            console.error(error);
+            const child = logger.child({error: error.toString()})
+            child.error(`Error occured during command execution.`)
             // Check for current interaction status and respond accordingly
             if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+                await interaction.followUp({ content: 'Ups, vypadá to, že se něco pokazilo, zkuste to prosím znovu později.', ephemeral: true });
             } else {
-                await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+                await interaction.reply({ content: 'Ups, vypadá to, že se něco pokazilo, zkuste to prosím znovu později.', ephemeral: true });
             }
         }
 	},

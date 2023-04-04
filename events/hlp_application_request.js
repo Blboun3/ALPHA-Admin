@@ -35,5 +35,6 @@ module.exports = {
         // If everything went ok => respond with ok ( XD )
         logger.info(`Role application by user ${interaction.member.id} was sent successfuly`)
         await interaction.reply({content: "Vaše žádost byla úspěšně odeslána.\nDěkujeme vám za zájem!", ephemeral: true})
+        return;
     }
 }
