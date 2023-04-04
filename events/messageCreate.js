@@ -1,5 +1,6 @@
 const {Events} = require('discord.js');
-const { counting_channel, counting_function} = require('../public_config.json');
+const { counting_channel, counting_function, verification_channel} = require('../public_config.json');
+const {clientId} = require('../config.json')
 
 module.exports = {
     name: Events.MessageCreate,
@@ -10,6 +11,12 @@ module.exports = {
         // Check if channel is announcements channel (automatically post all announcements)
         if(chnl.type === 5){
             message.crosspost();
+        }
+
+        // Delete message if it is in verification channel
+        if(chnl.id === verification_channel && message.author.id != clientId){
+            message.delete("You are not supposed to write here!");
+            return;
         }
 
         // Channel with counting

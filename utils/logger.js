@@ -1,7 +1,15 @@
 const pino = require('pino');
 const transport = pino.transport({
-	target: 'pino/file',
-	options: { destination: './log.json' },
+	targets:[
+		{
+		target: 'pino/file',
+		options: { destination: './log.json' },
+		},
+		{
+			target: 'pino-pretty',
+			options: {}
+		}
+	]
 });
 const logger = pino(transport);
 module.exports = logger;

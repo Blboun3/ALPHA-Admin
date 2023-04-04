@@ -25,6 +25,7 @@
     "discord.js": "^14.8.0",
     "node-cron": "^3.0.2",
     "pino": "^7.0.0-rc.9",
+    "pino-pretty": "^10.0.0",
     "undici": "^5.21.0"
   }
 }
