@@ -1,5 +1,4 @@
 const { ActionRowBuilder, SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const {role_selection_options, generalFooter, max_roles_selectable} = require('../../public_config.json')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -23,6 +22,11 @@ module.exports = {
                 .addChannelOption(option => option.setName('chnl').setDescription('In which channel should the message with the selection be sent in.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement, ChannelType.GuildText)))
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 	async execute(interaction) {
+        const role_selection_options = interaction.client.config.role_selection_options;
+        const generalFooter = interaction.client.config.generalFooter;
+        const max_roles_selectable = interaction.client.config.max_roles_selectable;
+        const logger = interaction.client.config.logger;
+
         // Rules option selected
         if(interaction.options.getSubcommand() === 'rules'){
             // Get channel from command
@@ -46,6 +50,7 @@ module.exports = {
             // Send to selected channel
             chnl.send({embeds: [embed_cz, embed_en]})
             // Reply to original interaction so it doesn't fail
+            logger.info(`Rules meesage was sent to channel: ${chnl.id}`);
             interaction.reply('Rules were sent to your desired channel.')
 
         } else if (interaction.options.getSubcommand() === 'roles'){
@@ -61,6 +66,7 @@ module.exports = {
                         .addOptions(role_selection_options)
                 )
             chnl.send({content: "Zde si můžete nastavit role dle svých zájmů:", components: [row]});
+            logger.info(`Roles meesage was sent to channel: ${chnl.id}`);
             await interaction.reply({content: "Roles selection messages was successfully sent to your desired channel."})
 
         } else if (interaction.options.getSubcommand('verify')) {
@@ -97,6 +103,7 @@ module.exports = {
             // Send embed
             chnl.send({embeds: [embed_cz/*, embed_en*/], components: [row]});
             // Reply to interaction so discord doesn't make problems
+            logger.info(`Verify meesage was sent to channel: ${chnl.id}`);
             await interaction.reply("Message with how to verify was sent to your desired channel.");
 
             

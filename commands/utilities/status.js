@@ -1,7 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const os = require('node:os');
-const { version, version_name } = require('../../package.json');
-const {generalFooter} = require('../../public_config.json')
 
 // Function that converts bytes into more human friendly units, used for showing how much RAM does system have
 const convertBytes = function(bytes) {
@@ -16,18 +14,18 @@ const convertBytes = function(bytes) {
     return (bytes / Math.pow(1024, i)).toFixed(1) + " " + sizes[i]
   }
 
-// Function to convert time in seconds to HH:MM:SS
-const secondsToTime = function(g_seconds) {
-    dateObj = new Date(g_seconds * 1000);
-    hours = dateObj.getUTCHours();
-    minutes = dateObj.getUTCMinutes();
-    seconds = dateObj.getSeconds();
-
-    timeString = hours.toString().padStart(2, '0') + ':' + 
-        minutes.toString().padStart(2, '0') + ':' + 
-        seconds.toString().padStart(2, '0');
-    
-        return timeString;
+// Function to convert time in seconds to DD:HH:MM:SS
+function secondsToTime(seconds) {
+  var dateOBJ = new Date(seconds*1000);
+  var hours = dateOBJ.getUTCHours().toString().padStart(2,'0');
+  var minutes = dateOBJ.getUTCMinutes().toString().padStart(2,'0');
+  var seconds = dateOBJ.getUTCSeconds().toString().padStart(2,'0');
+  var days = dateOBJ.getUTCDate().toString()-1; // It returns date since 1.1.1970, technically with uptime > month this would become problematic...
+  if(days != '0'){
+    return `${days} days, ${hours}:${minutes}:${seconds}`;
+  } else {
+    return `${hours}:${minutes}:${seconds}`;
+  }
 }
 
 module.exports = {
@@ -62,11 +60,11 @@ module.exports = {
             .setAuthor({ name: 'ALPHA', iconURL: 'https://cdn.discordapp.com/avatars/797862942036721664/ffc64d41e14d5d913c8a543dc4024cef.webp', url: 'https://github.com/Blboun3/ALPHA-Admin' })
             .setThumbnail('https://img.icons8.com/neon/256/ok.png')
             .setTimestamp()
-            .setFooter({text: generalFooter})
+            .setFooter({text: interaction.client.config.generalFooter})
             .addFields(
                 { name: 'Software info', value: `Running on (OS): \`${info.os_type}\` version (kernel): \`${info.os_version}\`\nSystem uptime: \`${info.uptime}\``, inline: true},
                 { name: 'Hardware info', value: `CPU Model: \`${info.cpu_model}\`\nCPU Architecture: \`${info.cpu_arch}\`\nLogical CPUs: \`${info.cpu_count}\`\nTotal system memory: \`${info.os_memory}\``, inline: true},
-                { name: 'Bot info', value: `Ping: \`${info.ping}ms\`\nVersion: \`${version}\`\nVersion name: \`${version_name}\`\nGithub: [https://github.com/Blboun3/ALPHA-Admin](https://github.com/Blboun3/ALPHA-Admin)`}
+                { name: 'Bot info', value: `Ping: \`${info.ping}ms\`\nVersion: \`${interaction.client.version}\`\nVersion name: \`${interaction.client.version_name}\`\nGithub: [https://github.com/Blboun3/ALPHA-Admin](https://github.com/Blboun3/ALPHA-Admin)`}
             )
 
     // Send private or public response depenending on user's choice

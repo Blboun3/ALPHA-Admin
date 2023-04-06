@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
-const {generalFooter} = require('../../public_config.json')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -34,7 +33,7 @@ module.exports = {
             .setThumbnail(info.pfp)
             .setTimestamp()
             .setColor('#EFAD7B')
-            .setFooter({text: generalFooter})
+            .setFooter({text: interaction.client.config.generalFooter})
 
         await interaction.reply({embeds: [embed], ephemeral: true})
 	},

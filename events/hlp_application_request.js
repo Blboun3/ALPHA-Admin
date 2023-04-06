@@ -11,7 +11,7 @@ module.exports = {
             .setColor('#B35609')
             .setTitle(`Žádost o roli ${interaction.customId.split('_')[2]}`)
             .setTimestamp()
-            .setFooter({text: 'ALPHA Admin bot by Blboun3#0084'})
+            .setFooter({text: interaction.client.config.generalFooter})
 
         // Different embed descriptions depending on request type
         if(interaction.customId === 'application_request_dif'){

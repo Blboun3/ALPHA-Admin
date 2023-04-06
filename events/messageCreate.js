@@ -1,10 +1,13 @@
 const {Events} = require('discord.js');
-const { counting_channel, counting_function, verification_channel} = require('../public_config.json');
-const {clientId} = require('../config.json')
 
 module.exports = {
     name: Events.MessageCreate,
     async execute(message) {
+        const clientId = message.client.config.clientId;
+        const counting_channel = message.client.config.counting_channel;
+        const counting_function = message.client.config.counting_function;
+        const verification_channel = message.client.config.verification_channel;
+
         // Get channel in which message was sent
         const chnl = message.channel;
 

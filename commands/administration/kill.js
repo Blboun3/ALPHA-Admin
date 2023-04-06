@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const logger = require('../../utils/logger');
 
 function sleep(ms) {
     return new Promise((resolve) => {
@@ -22,6 +21,7 @@ module.exports = {
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 	async execute(interaction) {
+        const logger = interaction.client.logger;
         const code = await interaction.options.getInteger('exit_code');
         await interaction.reply({ content: "Process will exit soon.", ephemeral:true});
         if(code != null){

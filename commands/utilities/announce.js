@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits, ChannelType} = require('discord.js');
-const {generalFooter} = require('../../public_config.json')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -43,7 +42,7 @@ module.exports = {
             .setColor('#8730A6')
             .setDescription(`${content.toString().replaceAll('\\n', '\n')}`)
             .setTimestamp()
-            .setFooter({text: generalFooter})
+            .setFooter({text: interaction.client.config.generalFooter})
 
             if(hide != true){
                 embed.setAuthor({name: interaction.member.displayName, iconURL: interaction.member.displayAvatarURL()});

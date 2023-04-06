@@ -1,11 +1,9 @@
 const { Events, AttachmentBuilder } = require('discord.js');
-const { verified_role, welcome_channel } = require('../public_config.json')
 const application_request_processor = require('./hlp_application_request');
 const { request } = require('undici');
 const role_selector = require('./hlp_role_selector');
 const Canvas = require('@napi-rs/canvas');
 const { GlobalFonts } = require('@napi-rs/canvas');
-const logger = require('../utils/logger');
 
 // Pass the entire Canvas object because you'll need access to its width and context
 const applyText = (canvas, text) => {
@@ -27,6 +25,9 @@ const applyText = (canvas, text) => {
 module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
+        const logger = interaction.client.logger;
+        const verified_role = interaction.client.config.verified_role;
+        const welcome_channel = interaction.client.config.welcome_channel;
         // Verification
         if(interaction.customId === 'verification_btn'){
             // Give user verified role

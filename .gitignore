@@ -120,3 +120,5 @@ log.json
 config.json
 
 .vscode
+
+*.sqlite

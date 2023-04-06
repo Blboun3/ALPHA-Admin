@@ -1,10 +1,10 @@
-const { guildId } = require("../config.json");
-const { people_display_channel, age_display_channel } = require('../public_config.json');
-const logger = require('../utils/logger');
-
 module.exports = {
     name: "info",
     async execute(client) {
+        const logger = client.logger;
+        const guildId = client.config.guildId;
+        const people_display_channel = client.config.people_display_channel;
+        const age_display_channel = client.config.age_display_channel;
         // Prepare object for data storing
         var data = {
             age: 0,

@@ -1,9 +1,9 @@
-const {allRoles } = require('../public_config.json');
 const logger = require('../utils/logger');
 
 module.exports = {
     name: "role_selector",
     async execute(interaction) {
+        const allRoles = interaction.client.config.allRoles;
         try {
             // Get user roles and selected roles
             const userRoles = interaction.member.roles;
