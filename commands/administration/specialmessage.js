@@ -69,7 +69,7 @@ module.exports = {
             logger.info(`Roles meesage was sent to channel: ${chnl.id}`);
             await interaction.reply({content: "Roles selection messages was successfully sent to your desired channel."})
 
-        } else if (interaction.options.getSubcommand('verify')) {
+        } else if (interaction.options.getSubcommand() == 'verify') {
             // Get channel from command
             const chnl = interaction.options.getChannel('chnl');
             // embed with informations about how to verify

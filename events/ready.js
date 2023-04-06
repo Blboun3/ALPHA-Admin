@@ -5,16 +5,18 @@ const logger = require('../utils/logger');
 const get_database = require('../utils/get_database');
 const { version, version_name } = require('../package.json');
 
+const TicketSystem = require('../utils/ticket_system');
+
 module.exports = {
 	name: Events.ClientReady,
 	once: true,
-	execute(client) {
+	async execute(client) {
 		// Inform user that bot has started
 		logger.info(`Ready! Logged in as ${client.user.tag}`);
 		// Setup cron task for info
 		cron.schedule('30,0 * * * *', () => {info.execute(client)});
 		// Get database(s) and stoe their object on client 
-		client.DB = get_database.execute();
+		client.DB = await get_database.execute();
 		// Load configs into the Client object
 		client.config = Object.assign(require('../config.json'),require('../public_config.json'));
 		// Also add logger
@@ -22,5 +24,6 @@ module.exports = {
 		// Store verision info
 		client.version = version;
 		client.version_name = version_name;
+		client.TicketSystem = new TicketSystem(client);
 	},
 };

@@ -114,7 +114,7 @@ module.exports = {
         // Error handling
         } catch (error) {
             const child = logger.child({error: error.toString()})
-            child.error(`Error occured during command execution.`)
+            child.error(`Error occured during execution of command ${interaction.commandName}.`)
             // Check for current interaction status and respond accordingly
             if (interaction.replied || interaction.deferred) {
                 await interaction.followUp({ content: 'Ups, vypadá to, že se něco pokazilo, zkuste to prosím znovu později.', ephemeral: true });
