@@ -1,6 +1,6 @@
 {
   "name": "alpha-admin",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "versionName": "Ennio Morricone",
   "description": "Discord admin bot made for ALPHA server",
   "main": "./dist/app.js",

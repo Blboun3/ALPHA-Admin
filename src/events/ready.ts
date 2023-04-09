@@ -8,7 +8,7 @@ export default function ready(client: Client) {
     throw new Error("Client user is null");
   }
   logger.info(`Ready! Logged in as ${client.user.tag}`);
-
+  void info(client);
   setInterval(() => {
     void info(client);
   }, 1000 * 60 * 30);
