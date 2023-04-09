@@ -1,0 +1,12 @@
+{
+  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node-lts/tsconfig"],
+  "ts-node": {
+    "files": true
+  },
+  "compilerOptions": {
+    "outDir": "./dist" /* Specify an output folder for all emitted files. */,
+    "removeComments": true /* Disable emitting comments. */,
+    "newLine": "lf" /* Set the newline character for emitting files. */,
+    "verbatimModuleSyntax": false /* Emit module import statements with the full module specifier. */
+  }
+}

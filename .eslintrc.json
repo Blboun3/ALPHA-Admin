@@ -1,0 +1,49 @@
+{
+  "plugins": ["node", "unicorn", "sonarjs", "only-error", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/strict",
+    "plugin:node/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:sonarjs/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "semi": ["error", "always"],
+    "eqeqeq": "error",
+    "no-else-return": "error",
+    "no-var": "error",
+    "no-floating-decimal": "error",
+    "block-scoped-var": "error",
+    "camelcase": "error",
+    "default-case-last": "error",
+    "no-confusing-arrow": "error",
+    "prefer-const": "error",
+    "no-use-before-define": "error",
+    "no-unneeded-ternary": "error",
+
+    "unicorn/prevent-abbreviations": "off",
+    "sonarjs/no-duplicate-string": "off",
+    "node/no-unsupported-features/es-syntax": "off",
+    "node/no-missing-import": "off",
+    "node/no-unpublished-import": "off",
+    "unicorn/prefer-top-level-await": "off",
+
+    // blonarna start
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+
+    "sonarjs/cognitive-complexity": "off"
+  },
+  "ignorePatterns": ["node_modules/", "prettier.config.js", "dist/"]
+}
